@@ -1,11 +1,11 @@
-<view class="wrapper  cml-base cml-view cml-e0035986">
-  <view class=" cml-base cml-view cml-e0035986"><topic-header title="{{'专题'}}" class=" cml-base cml-topic-header cml-e0035986"></topic-header></view>
-    <view class="scroller-view-box  cml-base cml-view cml-e0035986">
+<view class="wrapper  cml-base cml-view cml-7e82e0e4">
+  <view class=" cml-base cml-view cml-7e82e0e4"><topic-header title="{{'专题'}}" class=" cml-base cml-topic-header cml-7e82e0e4"></topic-header></view>
+    <view class="scroller-view-box  cml-base cml-view cml-7e82e0e4">
       
         
       
-      <view a:for="{{articles}}" class="cell-button  cml-base cml-view cml-e0035986">
-        <view class=" cml-base cml-view cml-e0035986"><topic-main article="{{item}}" url="" class=" cml-base cml-topic-main cml-e0035986"></topic-main></view>
+      <view a:for="{{articles}}" class="cell-button  cml-base cml-view cml-7e82e0e4">
+        <view class=" cml-base cml-view cml-7e82e0e4"><topic-main article="{{item}}" url="" class=" cml-base cml-topic-main cml-7e82e0e4"></topic-main></view>
       </view>
     </view>
 </view>

@@ -1,0 +1,13 @@
+<view class=" cml-base cml-view cml-23cdb29e"><cml-buildin-page title="video" class=" cml-base cml-page cml-23cdb29e">
+  <view class="page-body  cml-base cml-view cml-23cdb29e">
+    <view class="page-section tc  cml-base cml-view cml-23cdb29e">
+      <view class="videoWrapper  cml-base cml-view cml-23cdb29e">
+        <view class="video  cml-base cml-view cml-23cdb29e"><cml-buildin-video id="myVideo" class="video  cml-base cml-video cml-23cdb29e" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" onFail="_cmlEventProxy" data-eventfail="videoErrorCallback" controls></cml-buildin-video></view>
+      </view>
+      <view class="btn-area  cml-base cml-view cml-23cdb29e">
+        <view class="page-body-button  cml-base cml-view cml-23cdb29e"><cml-buildin-button onOnclick="_cmlEventProxy" data-eventonclick="bindPlay" class="page-body-button  cml-base cml-button cml-23cdb29e" type="primary" text="播放"></cml-buildin-button></view>
+        <view class="page-body-button  cml-base cml-view cml-23cdb29e"><cml-buildin-button onOnclick="_cmlEventProxy" data-eventonclick="bindPause" class="page-body-button  cml-base cml-button cml-23cdb29e" type="primary" text="暂停"></cml-buildin-button></view>
+      </view>
+    </view>
+  </view>
+  </cml-buildin-page></view>

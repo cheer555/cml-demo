@@ -228,6 +228,13 @@ class Home {
         title: '查看动画展示',
         method: 'goAnimation'
       }]
+    },{
+      title: '视频',
+      iconUri: require(`../../assets/images/api/icon-default.png`),
+      list: [{
+        title: '创建 video 上下文',
+        method: 'video'
+      }]
     }]
   }
 
@@ -239,6 +246,11 @@ class Home {
   }
 
   methods = {
+    video() {
+      cml.navigateTo({
+        path: '/pages/api/sub-pages/video',
+      });  
+    },
     cellItemSeleted(e) {
       let { method, extraData } = e.detail;
       this[method] && this[method](extraData);

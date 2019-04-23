@@ -236,6 +236,12 @@
       "path": "/pages/demo/yanxuan/pages/map/map",
       "name": "yanxuan_map",
       "mock": "index.php"
+    },
+    {
+      "url": "/pages/api/sub-pages/video",
+      "path": "/pages/api/sub-pages/video",
+      "name": "视频",
+      "mock": "index.php"
     }
   ]
 }

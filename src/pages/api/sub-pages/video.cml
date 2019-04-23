@@ -1,0 +1,71 @@
+<template>
+  <page title="video">
+    <view class="page-body">
+      <view class="page-section tc">
+        <view class="videoWrapper">
+          <video id="myVideo" class="video" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" c-bind:fail="videoErrorCallback" controls></video>
+        </view>
+        <view class="btn-area">
+          <button c-bind:onclick="bindPlay" class="page-body-button" type="primary" text="播放"></button>
+          <button c-bind:onclick="bindPause" class="page-body-button" type="primary" text="暂停"></button>
+        </view>
+      </view>
+    </view>
+  </page>
+</template>
+
+<script>
+import cml from 'chameleon-api';
+let videoContext = null;
+class Video 
+{
+  data = {
+    src: '',
+    videoContext: null
+  }
+  mounted() {
+    videoContext = cml.createVideoContext('myVideo', this);
+  }
+  methods = {
+    bindPlay() {
+      videoContext.play()
+    },
+    bindPause() {
+      videoContext.pause()
+    },
+    videoErrorCallback(e) {
+      console.log('视频错误信息:')
+      console.log(e.detail.errMsg)
+    }
+  }
+}
+export default new Video();
+</script>
+
+<style scoped>
+.page-body {
+  padding: 40cpx;
+}
+@media cml-type(wx) {
+  .videoWrapper {
+    justify-content: center;
+    align-items: center;
+  }
+}
+.page-body-button {
+  margin-top: 30cpx;
+}
+</style>
+
+<script cml-type="json">
+{
+    "base": {
+        "usingComponents": {
+          "collapse": "/components/collapse/collapse"
+        },
+        "navigationBarTitleText": "API",
+        "backgroundTextStyle": "dark",
+        "backgroundColor": "#F0F2F7"
+    }
+}
+</script>

@@ -1,7 +1,7 @@
 var __CML__GLOBAL = require("../../manifest.js");
 __CML__GLOBAL.webpackJsonp([1],{
 
-/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml":
+/***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
@@ -52,31 +52,31 @@ var _index21 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/
 
 var _index22 = _interopRequireDefault(_index21);
 
-var _index23 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/navigateTo/index.js");
+var _index23 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/confirm/index.js");
 
 var _index24 = _interopRequireDefault(_index23);
 
-var _index25 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/confirm/index.js");
+var _index25 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/alert/index.js");
 
 var _index26 = _interopRequireDefault(_index25);
 
-var _index27 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/alert/index.js");
+var _index27 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/setTitle/index.js");
 
 var _index28 = _interopRequireDefault(_index27);
 
-var _index29 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/setTitle/index.js");
+var _index29 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/canIUse/index.js");
 
 var _index30 = _interopRequireDefault(_index29);
 
-var _index31 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/canIUse/index.js");
+var _index31 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/showToast/index.js");
 
 var _index32 = _interopRequireDefault(_index31);
 
-var _index33 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/showToast/index.js");
+var _index33 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/getLaunchOptionsSync/index.js");
 
 var _index34 = _interopRequireDefault(_index33);
 
-var _index35 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/getLaunchOptionsSync/index.js");
+var _index35 = __webpack_require__("./node_modules/chameleon-api/src/interfaces/navigateTo/index.js");
 
 var _index36 = _interopRequireDefault(_index35);
 
@@ -303,9 +303,21 @@ var Home = function () {
           title: '查看动画展示',
           method: 'goAnimation'
         }]
+      }, {
+        title: '视频',
+        iconUri: __webpack_require__("./src/assets/images/api/icon-default.png"),
+        list: [{
+          title: '创建 video 上下文',
+          method: 'video'
+        }]
       }]
     };
     this.methods = {
+      video: function video() {
+        (0, _index36.default)({
+          path: '/pages/api/sub-pages/video'
+        });
+      },
       cellItemSeleted: function cellItemSeleted(e) {
         var _e$detail = e.detail,
             method = _e$detail.method,
@@ -314,8 +326,8 @@ var Home = function () {
         this[method] && this[method](extraData);
       },
       getLaunchOptionsSync: function getLaunchOptionsSync() {
-        var options = (0, _index36.default)();
-        (0, _index34.default)({
+        var options = (0, _index34.default)();
+        (0, _index32.default)({
           message: JSON.stringify(options)
         });
       },
@@ -327,18 +339,18 @@ var Home = function () {
       },
       callNativeLogin: function callNativeLogin() {
         _chameleonBridge2.default.callNative('beatlesCommunicate', 'callNativeLogin', {}, function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: '返回登录结果: ' + JSON.stringify(res)
           });
         });
       },
       onLoginChange: function onLoginChange() {
         _chameleonBridge2.default.listenNative('beatlesCommunicate', 'onLoginChange', function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: '登录状态发生变化: ' + JSON.stringify(res)
           });
         });
-        (0, _index34.default)({
+        (0, _index32.default)({
           message: '注册登录状态变化事件成功'
         });
       },
@@ -346,12 +358,12 @@ var Home = function () {
         var _ref$apiName = _ref.apiName,
             apiName = _ref$apiName === undefined ? '' : _ref$apiName;
 
-        (0, _index32.default)(apiName).then(function (res) {
-          (0, _index34.default)({
+        (0, _index30.default)(apiName).then(function (res) {
+          (0, _index32.default)({
             message: ['当前版本支持', apiName].join(" ")
           });
         }, function (err) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: ['当前版本不支持', apiName].join(" ")
           });
         });
@@ -360,7 +372,7 @@ var Home = function () {
         var _ref2$title = _ref2.title,
             title = _ref2$title === undefined ? '' : _ref2$title;
 
-        (0, _index30.default)(title);
+        (0, _index28.default)(title);
       },
       showUx: function showUx(_ref3) {
         var _ref3$uX = _ref3.uX,
@@ -368,15 +380,15 @@ var Home = function () {
             _ref3$message = _ref3.message,
             message = _ref3$message === undefined ? '' : _ref3$message;
 
-        uX === 'showToast' && (0, _index34.default)({ message: message });
-        uX === 'alert' && (0, _index28.default)({ message: message, confirmTitle: '好的' });
-        uX === 'confirm' && (0, _index26.default)({ message: message });
+        uX === 'showToast' && (0, _index32.default)({ message: message });
+        uX === 'alert' && (0, _index26.default)({ message: message, confirmTitle: '好的' });
+        uX === 'confirm' && (0, _index24.default)({ message: message });
       },
       chooseImage: function chooseImage(_ref4) {
         var _ref4$type = _ref4.type,
             type = _ref4$type === undefined ? '' : _ref4$type;
 
-        (0, _index24.default)({
+        (0, _index36.default)({
           path: '/pages/api/sub-pages/chooseImage',
           query: {
             type: type
@@ -385,28 +397,28 @@ var Home = function () {
       },
       getGeo: function getGeo() {
         (0, _index22.default)().then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: JSON.stringify(res)
           });
         }).catch(function (err) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: err.message
           });
         });
       },
       getSystemInfo: function getSystemInfo() {
         (0, _index20.default)().then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: JSON.stringify(res),
             duration: 2000
           });
         });
       },
       px2cpx: function px2cpx() {
-        (0, _index34.default)({ message: ['1px 合 ', (0, _index18.default)(1), 'cpx'].join("") });
+        (0, _index32.default)({ message: ['1px 合 ', (0, _index18.default)(1), 'cpx'].join("") });
       },
       cpx2px: function cpx2px() {
-        (0, _index34.default)({ message: ['1cpx 合 ', (0, _index16.default)(1), 'px'].join("") });
+        (0, _index32.default)({ message: ['1cpx 合 ', (0, _index16.default)(1), 'px'].join("") });
       },
       clipBoard: function clipBoard(_ref5) {
         var _ref5$action = _ref5.action,
@@ -416,13 +428,13 @@ var Home = function () {
 
         if (action === 'get') {
           (0, _index14.default)().then(function (res) {
-            (0, _index34.default)({
+            (0, _index32.default)({
               message: JSON.stringify(res)
             });
           });
         } else {
           (0, _index12.default)('AA').then(function (res) {
-            (0, _index34.default)({
+            (0, _index32.default)({
               message: '剪贴板内容已设置为:AA'
             });
           });
@@ -433,34 +445,34 @@ var Home = function () {
             action = _ref6$action === undefined ? '' : _ref6$action;
 
         action === 'set' && (0, _index10.default)('name', 'ironman').then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: 'name 已设置为 ironman'
           });
         });
         action === 'get' && (0, _index8.default)('name').then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: res
           });
         }, function (err) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: err.message || 'name 值已不存在'
           });
         });
         action === 'remove' && (0, _index6.default)('name').then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: 'name 值已删除'
           });
         });
       },
       getRect: function getRect() {
         (0, _index4.default)('titleText', this).then(function (res) {
-          (0, _index34.default)({
+          (0, _index32.default)({
             message: JSON.stringify(res)
           });
         });
       },
       goAnimation: function goAnimation() {
-        (0, _index24.default)({
+        (0, _index36.default)({
           path: '/pages/api/sub-pages/animation'
         });
       },
@@ -468,7 +480,7 @@ var Home = function () {
         var _ref7$method = _ref7.method,
             method = _ref7$method === undefined ? '' : _ref7$method;
 
-        (0, _index24.default)({
+        (0, _index36.default)({
           path: '/pages/api/sub-pages/request',
           query: {
             method: method
@@ -476,12 +488,12 @@ var Home = function () {
         });
       },
       webSocket: function webSocket() {
-        (0, _index24.default)({
+        (0, _index36.default)({
           path: '/pages/api/sub-pages/webSocket'
         });
       },
       navigateTo: function navigateTo() {
-        (0, _index24.default)({
+        (0, _index36.default)({
           path: '/pages/api/sub-pages/navigate',
           query: {
             method: 'navigateTo'
@@ -519,14 +531,14 @@ exports.default = _chameleonRuntime2.default.createPage(exports.default).getOpti
 
 /***/ }),
 
-/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"baidu\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/baidu/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"baidu\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml":
+/***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"baidu\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/configs/postcss/baidu/.postcssrc.js\"}}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"baidu\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/webpack/buildin/module.js":
+/***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/webpack/buildin/module.js":
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -880,11 +892,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/alert/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/alert/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -1283,11 +1295,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _config = __webpack_require__("./node_modules/chameleon-api/src/config.js");
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/canIUse/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/canIUse/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -1672,11 +1684,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/confirm/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/confirm/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -2081,11 +2093,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/getClipBoardData/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/getClipBoardData/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -2501,11 +2513,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/getLaunchOptionsSync/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/getLaunchOptionsSync/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -2863,11 +2875,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/getStorage/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/getStorage/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -3197,7 +3209,7 @@ var Method = function () {
         var _data = swan.getStorageSync(key);
 
         if (typeof _data !== 'string') {
-          _data = JSON.stringify(value);
+          _data = JSON.stringify(_data);
         }
 
         cb({
@@ -3274,11 +3286,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _utils = __webpack_require__("./node_modules/chameleon-api/src/lib/utils.js");
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/redirectTo/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/redirectTo/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -3288,7 +3300,7 @@ var __CHECK__DEFINES__ = {
   "types": {
     "options": {
       "path": "String",
-      "query": "String",
+      "query": "CMLObject",
       "url": "String"
     }
   },
@@ -3603,7 +3615,7 @@ var Method = function () {
       var path = opt.path,
           query = opt.query;
 
-      path = (0, _utils.buildQueryStringUrl)((0, _utils.queryParse)(query), path);
+      path = (0, _utils.buildQueryStringUrl)(query, path);
       swan.redirectTo({
         url: path
       });
@@ -3631,23 +3643,13 @@ var _index = __webpack_require__("./node_modules/chameleon-api/src/interfaces/re
 
 var _index2 = _interopRequireDefault(_index);
 
-var _utils = __webpack_require__("./node_modules/chameleon-api/src/lib/utils.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function redirectTo(opt) {
-  var query = '';
-  var path = '';
-  var url = '';
-  if (opt.path) {
-    path = opt.path;
-  }
-  if (opt.url) {
-    url = opt.url;
-  }
-  if (typeof opt.query !== 'string') {
-    query = (0, _utils.buildQueryStringUrl)(opt.query);
-  }
+  var query = opt.query || {};
+  var path = opt.path || '';
+  var url = opt.url || '';
+
   _index2.default.redirectTo({
     path: path,
     url: url,
@@ -3666,11 +3668,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/removeStorage/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/removeStorage/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -4095,11 +4097,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-api/src/interfaces/setStorage/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-api/src/interfaces/setStorage/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -4541,7 +4543,7 @@ function canIUse(_ref, cb) {
 
 canIUse.prototype.moduleName = cModuleName;
 canIUse.prototype.methodName = cMethodName;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/webpack/buildin/module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
 
@@ -4683,11 +4685,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-bridge/apis/getComponentRect/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-bridge/apis/getComponentRect/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -5079,11 +5081,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-bridge/apis/getQueryObjSync/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-bridge/apis/getQueryObjSync/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -5918,11 +5920,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/node_modules/chameleon-bridge/core/index.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/node_modules/chameleon-bridge/core/index.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -6505,8 +6507,8 @@ function isNeedApiPrefix(url) {
 }
 
 function addApiPrefix(url) {
-  if (process && process.env && "http://172.24.36.57:5556") {
-    return "http://172.24.36.57:5556" + url;
+  if (process && process.env && "http://172.24.29.84:5556") {
+    return "http://172.24.29.84:5556" + url;
   }
   return url;
 }
@@ -6627,7 +6629,7 @@ function parseVersion() {
   });
   return parseInt(ret.join(''), 10);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/process/browser.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -6647,11 +6649,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _util = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
+var _util = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/cml-compile/runtime/common/util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/didi/cml-demo/src/components/unsupported/unsupported.interface";
+var __INTERFACE__FILEPATH = "/Users/didi/Documents/code/cml-demo/src/components/unsupported/unsupported.interface";
 var __CML_ERROR__ = function throwError(content) {
   throw new Error("\u6587\u4EF6\u4F4D\u7F6E: " + __INTERFACE__FILEPATH + "\n            " + content);
 };
@@ -6985,8 +6987,8 @@ exports.default = __OBJECT__WRAPPER__(new Method());
 /***/ "./src/pages/api/api.cml":
 /***/ (function(module, exports, __webpack_require__) {
 
-var __cml__style0 = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"baidu\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/configs/postcss/baidu/.postcssrc.js\"}}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"baidu\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml");
-var __cml__script = __webpack_require__("../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../../.nvm/versions/node/v8.12.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml");
+var __cml__style0 = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"baidu\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/configs/postcss/baidu/.postcssrc.js\"}}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"baidu\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml");
+var __cml__script = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=page&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./src/pages/api/api.cml");
 
 
 /***/ })
