@@ -16,7 +16,6 @@
 
 <script>
 import cml from 'chameleon-api';
-let videoContext = null;
 class Video 
 {
   data = {
@@ -24,14 +23,14 @@ class Video
     videoContext: null
   }
   mounted() {
-    videoContext = cml.createVideoContext('myVideo', this);
+    this.videoContext = cml.createVideoContext('myVideo', this);
   }
   methods = {
     bindPlay() {
-      videoContext.play()
+      this.videoContext.play()
     },
     bindPause() {
-      videoContext.pause()
+      this.videoContext.pause()
     },
     videoErrorCallback(e) {
       console.log('视频错误信息:')
