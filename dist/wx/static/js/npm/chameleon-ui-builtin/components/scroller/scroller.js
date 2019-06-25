@@ -388,7 +388,9 @@ var Scroller = function () {
       }
     };
     this.data = {
-      cmtStyle: ''
+      cmtStyle: '',
+      scrollTopPx: 0,
+      scrollLeftPx: 0
     };
     this.computed = {
       wrapperStyle: function wrapperStyle() {
@@ -404,13 +406,14 @@ var Scroller = function () {
 
 
         return this.cmtStyle + this.cstyle;
+      }
+    };
+    this.watch = {
+      scrollTop: function scrollTop(v) {
+        this.scrollTopPx = (0, _index8.default)(v);
       },
-      scrollTopPx: function scrollTopPx() {
-        // scroll-top仅支持px
-        return (0, _index8.default)(this.scrollTop);
-      },
-      scrollLeftPx: function scrollLeftPx() {
-        return (0, _index8.default)(this.scrollLeft);
+      scrollLeft: function scrollLeft(v) {
+        this.scrollLeftPx = (0, _index8.default)(v);
       }
     };
     this.methods = {
@@ -487,6 +490,11 @@ var Scroller = function () {
                 }
 
               case 14:
+
+                _this2.scrollLeftPx = (0, _index8.default)(_this2.scrollLeft);
+                _this2.scrollTopPx = (0, _index8.default)(_this2.scrollTop);
+
+              case 16:
               case "end":
                 return _context.stop();
             }

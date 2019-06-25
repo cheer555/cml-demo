@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([81],{
+__CML__GLOBAL.webpackJsonp([78],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-picker/c-picker.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -42,11 +42,7 @@ var CPicker = function CPicker() {
         },
         list: {
             type: Array,
-            default: []
-        },
-        data: {
-            type: Array,
-            default: []
+            default: ['']
         },
         defaultIndex: {
             type: Number,
@@ -65,14 +61,7 @@ var CPicker = function CPicker() {
             default: ''
         }
     };
-    this.computed = {
-        pickerData: function pickerData() {
-            if (this.list && this.list.length > 0) {
-                return this.list;
-            }
-            return this.data;
-        }
-    };
+    this.computed = {};
     this.methods = {
         cancel: function cancel() {
             this.$cmlEmit('cancel');

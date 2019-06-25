@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([90],{
+__CML__GLOBAL.webpackJsonp([93],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/radio/radio.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -28,7 +28,8 @@ var Radio = function () {
         default: false
       },
       label: {
-        type: String
+        type: String,
+        default: ''
       },
       disabled: {
         type: Boolean,
@@ -45,6 +46,10 @@ var Radio = function () {
       color: {
         type: String,
         default: '#fc9153'
+      },
+      cstyle: {
+        type: String,
+        default: ''
       }
     };
     this.data = {
@@ -78,6 +83,10 @@ var Radio = function () {
           return this.innerChecked ? 'cml-radio-selected-disabled' : 'cml-radio-unselect-disabled';
         }
         return this.innerChecked ? 'cml-radio-selected' : 'cml-radio-unselect';
+      },
+      computedCstyle: function computedCstyle() {
+        //小程序端转cpx
+        return this.cstyle;
       }
     };
     this.watch = {
@@ -90,11 +99,10 @@ var Radio = function () {
         if (this.disabled) return;
         this.innerChecked = !this.innerChecked;
         var value = {
-          value: this.innerChecked
+          value: this.innerChecked,
+          index: this.groupIndex
         };
-        if (this.groupIndex !== -1) {
-          value.index = this.groupIndex;
-        }
+
         this.$cmlEmit('change', value);
         this.$cmlEmit('changeevent', value);
       }

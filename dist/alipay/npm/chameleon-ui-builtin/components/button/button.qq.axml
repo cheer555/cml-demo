@@ -1,0 +1,4 @@
+<button class="{{btnClasses}}  cml-base cml-button cml-59e0389c" style="{{mrBtnStyle}}" onTap="_cmlEventProxy" data-eventtap="onclick" onTouchStart="_cmlEventProxy" data-eventtouchstart="touchstart" onTouchEnd="_cmlEventProxy" data-eventtouchend="touchend" open-type="{{openType}}" lang="{{lang}}" onGetuserinfo="_cmlEventProxy" data-eventgetuserinfo="getuserinfo" onOpensetting="_cmlEventProxy" data-eventopensetting="opensetting" onLaunchapp="_cmlEventProxy" data-eventlaunchapp="launchapp" onError="_cmlEventProxy" data-eventerror="error">
+  <text a:if="{{text}}" class="{{textClasses}}  cml-base cml-text cml-59e0389c" style="{{mrTextStyle}}">{{text}}</text>
+  <slot a:else class=" cml-base cml-slot cml-59e0389c"></slot>
+</button>

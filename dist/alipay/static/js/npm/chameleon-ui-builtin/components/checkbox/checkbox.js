@@ -28,7 +28,8 @@ var Checkbox = function () {
         default: false
       },
       label: {
-        type: String
+        type: String,
+        default: ''
       },
       disabled: {
         type: Boolean,
@@ -41,6 +42,18 @@ var Checkbox = function () {
       groupIndex: {
         type: Number,
         default: -1
+      },
+      checkedIcon: {
+        type: String,
+        default: ''
+      },
+      uncheckIcon: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
       }
     };
     this.data = {
@@ -69,11 +82,20 @@ var Checkbox = function () {
           return 'cml-checkbox-disabled';
         }
         return this.innerChecked ? 'cml-checkbox-checked' : 'cml-checkbox-uncheck';
+      },
+      computedCstyle: function computedCstyle() {
+        return this.cstyle;
       }
     };
     this.watch = {
       checked: function checked(newChecked) {
         this.innerChecked = newChecked;
+      },
+      uncheckIcon: function uncheckIcon() {
+        this.initImg();
+      },
+      checkedIcon: function checkedIcon() {
+        this.initImg();
       }
     };
     this.methods = {
@@ -81,13 +103,20 @@ var Checkbox = function () {
         if (this.disabled) return;
         this.innerChecked = !this.innerChecked;
         var value = {
-          value: this.innerChecked
+          value: this.innerChecked,
+          index: this.groupIndex
         };
-        if (this.groupIndex !== -1) {
-          value.index = this.groupIndex;
-        }
+
         this.$cmlEmit('changeevent', value);
         this.$cmlEmit('change', value);
+      },
+      initImg: function initImg() {
+        if (this.uncheckIcon) {
+          this.uncheckImg = this.uncheckIcon;
+        }
+        if (this.checkedIcon) {
+          this.checkedImg = this.checkedIcon;
+        }
       }
     };
   }
@@ -98,6 +127,11 @@ var Checkbox = function () {
       var checked = this.checked;
 
       this.innerChecked = checked;
+    }
+  }, {
+    key: 'mounted',
+    value: function mounted() {
+      this.initImg();
     }
   }]);
 

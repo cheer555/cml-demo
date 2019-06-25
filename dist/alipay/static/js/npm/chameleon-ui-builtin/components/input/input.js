@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([23],{
+__CML__GLOBAL.webpackJsonp([106],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=alipay&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/input/input.alipay.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -504,79 +504,6 @@ exports.default = _chameleonRuntime2.default.createComponent(exports.default).ge
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./node_modules/chameleon-ui-builtin/assets/js/utils/utils.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _index = __webpack_require__("./node_modules/chameleon-api/src/interfaces/cpx2px/index.js");
-
-var _index2 = _interopRequireDefault(_index);
-
-exports.str2obj = str2obj;
-exports.pxTransform = pxTransform;
-exports.cmlStyleTransfer = cmlStyleTransfer;
-exports.getValBetweenMaxAndMin = getValBetweenMaxAndMin;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function str2obj(str) {
-    var styleAry = str.split(';');
-    var obj = {};
-    styleAry.forEach(function (element) {
-        var classObj = element.split(':');
-        var className = String(classObj[0]).replace(/(^\s*)|(\s*)$/g, "");
-        var classValue = String(classObj[1]).replace(/(^\s*)|(\s*)$/g, "");
-        obj[className] = classValue;
-    });
-    return obj;
-}
-
-function pxTransform(s) {
-    if (!s) return '';
-    if (!!~s.indexOf('cpx')) {
-        return s.replace(/(-?\d*\.?\d*)cpx/ig, function (matchs, $1) {
-            return (0, _index2.default)(Number($1)) + 'px';
-        });
-    }
-    return s;
-}
-
-function cmlStyleTransfer(str) {
-    if (!str) return {};
-    var styleAry = str.split(';');
-    var obj = {};
-    styleAry.forEach(function (element) {
-        var classObj = element.split(':');
-        var className = String(classObj[0]).replace(/(^\s*)|(\s*)$/g, "");
-        if (className) {
-            var classValue = pxTransform(String(classObj[1]).replace(/(^\s*)|(\s*)$/g, ""));
-            obj[className] = classValue;
-        }
-    });
-    return obj;
-}
-
-function getValBetweenMaxAndMin(value, maxValue, minValue) {
-    if (isNaN(Number(value))) {
-        return '';
-    }
-    if (isNaN(maxValue) || isNaN(minValue)) {
-        return value;
-    }
-    if (maxValue != Infinity && maxValue <= Number(value)) {
-        value = String(maxValue);
-    }
-    if (minValue != -Infinity && minValue >= Number(value)) {
-        value = String(minValue);
-    }
-    return value;
-}
 
 /***/ }),
 

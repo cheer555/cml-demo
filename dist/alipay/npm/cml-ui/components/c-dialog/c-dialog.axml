@@ -5,7 +5,8 @@
       <image src="{{closeSrc}}" style="width:22rpx;height:22rpx" class=" cml-base cml-image cml-a2145de0" />
     </view>
     
-      <view class="icon-row  cml-base cml-view cml-a2145de0">
+    <view class="dialog-content-wrap  cml-base cml-view cml-a2145de0">
+      <view class="icon-row  cml-base cml-view cml-a2145de0" a:if="{{showIcon}}">
         <image a:if="{{iconUrl}}" src="{{iconUrl}}" class="custom-icon  cml-base cml-image cml-a2145de0" style="{{computedIconStyle}}" />       
         <view a:else class="icon-bg  cml-base cml-view cml-a2145de0">
           <image src="{{iconSrc}}" class="icon  cml-base cml-image cml-a2145de0" />
@@ -13,6 +14,7 @@
       </view>
       <text class="title-row  cml-base cml-text cml-a2145de0">{{title}}</text>
       <text class="content-row  cml-base cml-text cml-a2145de0">{{content}}</text>
+    </view>
     
     
       <view class="btn-row border-top-1px cml-border-top-1px  cml-base cml-view cml-a2145de0">

@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([85],{
+__CML__GLOBAL.webpackJsonp([82],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=alipay&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-actionsheet/c-actionsheet.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -26,7 +26,7 @@ var CActionsheet = function CActionsheet() {
     },
     title: {
       type: String,
-      default: "标题"
+      default: ""
     },
     cancelTxt: {
       type: String,
@@ -50,7 +50,7 @@ var CActionsheet = function CActionsheet() {
     },
     list: {
       type: Array,
-      default: []
+      default: ['']
     },
     pickerStyle: {
       type: Boolean,
@@ -87,7 +87,7 @@ var CActionsheet = function CActionsheet() {
     },
     itemClick: function itemClick(e) {
       this.$cmlEmit("select", {
-        index: e.currentTarget.dataset.idx,
+        index: String(e.currentTarget.dataset.idx),
         value: e.currentTarget.dataset.value
       });
     },

@@ -22,8 +22,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var videoContext = null;
-
 var Video = function () {
   function Video() {
     _classCallCheck(this, Video);
@@ -34,10 +32,10 @@ var Video = function () {
     };
     this.methods = {
       bindPlay: function bindPlay() {
-        videoContext.play();
+        this.videoContext.play();
       },
       bindPause: function bindPause() {
-        videoContext.pause();
+        this.videoContext.pause();
       },
       videoErrorCallback: function videoErrorCallback(e) {
         console.log('视频错误信息:');
@@ -49,7 +47,7 @@ var Video = function () {
   _createClass(Video, [{
     key: 'mounted',
     value: function mounted() {
-      videoContext = (0, _index2.default)('myVideo', this);
+      this.videoContext = (0, _index2.default)('myVideo', this);
     }
   }]);
 
@@ -399,7 +397,7 @@ var Method = function () {
   _createClass(Method, [{
     key: "createVideoContext",
     value: function createVideoContext(id, instance) {
-      return {};
+      return swan.createVideoContext('cmlVideo');
     }
   }]);
 

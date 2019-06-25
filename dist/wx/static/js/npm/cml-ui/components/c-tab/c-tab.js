@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([75],{
+__CML__GLOBAL.webpackJsonp([72],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-tab/c-tab.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -22,12 +22,11 @@ var CTabs = function CTabs() {
   this.props = {
     tabs: { //label labelStyle prefixIcon  suffixIcon
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: [{}]
     },
     activeLabel: {
-      type: String
+      type: String,
+      default: ''
     },
     //标识item子项的排列方向,默认横向排列
     inline: {
@@ -69,7 +68,7 @@ var CTabs = function CTabs() {
       var leftIndex = foundIndex == -1 ? 0 : foundIndex;
 
       var leftOffset = leftIndex * width;
-      var style = ";width:" + width + "cpx;transform: translateX(" + leftOffset + "cpx);";
+      var style = ';width:' + width + 'cpx;transform: translateX(' + leftOffset + 'cpx);';
       return this.lineStyle + style;
     }
   };

@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([79],{
+__CML__GLOBAL.webpackJsonp([76],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-radio-group/c-radio-group.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -25,7 +25,7 @@ var Radiogroup = function () {
     this.props = {
       option: {
         type: Array,
-        default: []
+        default: [{}]
       },
       position: {
         type: String,
@@ -34,6 +34,18 @@ var Radiogroup = function () {
       horizontal: {
         type: Boolean,
         default: false
+      },
+      color: {
+        type: String,
+        default: '#fc9153'
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
+      itemStyle: {
+        type: String,
+        default: ''
       }
     };
     this.data = {
@@ -42,9 +54,9 @@ var Radiogroup = function () {
     this.computed = {
       horizontalStyle: function horizontalStyle() {
         if (this.horizontal) {
-          return 'display:inline-flex;flex-direction:row;align-items:center;flex-wrap:wrap;flex:1;';
+          return 'display:inline-flex;flex-direction:row;align-items:center;flex-wrap:wrap;flex:1;' + this.cstyle;
         }
-        return '';
+        return this.cstyle;
       },
       subPosition: function subPosition() {
         // 水平排列默认位置失效
@@ -52,6 +64,15 @@ var Radiogroup = function () {
           return 'right';
         }
         return 'left';
+      }
+    };
+    this.watch = {
+      option: function option(n) {
+        try {
+          this.radioList = JSON.parse(JSON.stringify(n));
+        } catch (e) {
+          console.error('【c-radio-group】入参option有问题，', e);
+        }
       }
     };
     this.methods = {
@@ -73,9 +94,13 @@ var Radiogroup = function () {
   }
 
   _createClass(Radiogroup, [{
-    key: 'created',
-    value: function created() {
-      this.radioList = JSON.parse(JSON.stringify(this.option));
+    key: 'mounted',
+    value: function mounted() {
+      try {
+        this.radioList = JSON.parse(JSON.stringify(this.option));
+      } catch (e) {
+        console.error('【c-radio-group】入参option有问题，', e);
+      }
     }
   }]);
 

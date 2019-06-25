@@ -705,13 +705,16 @@ function request(_ref) {
     if (apiPrefix) {
       // 有apiPrefix优先
       if (true) {
-        url = "http://172.24.29.84:5556" + url;
+        url = "http://172.24.29.96:5556" + url;
       }
     }
   }
 
   if (['GET', 'PUT', 'DELETE'].indexOf(method) > -1) {
     url = (0, _utils.buildQueryStringUrl)(data, url);
+    if (method == 'GET') {
+      data = '';
+    }
   }
   switch (contentType) {
     case 'form':
@@ -748,6 +751,7 @@ function request(_ref) {
       headers: header,
       cb: function cb(res) {
         var status = res.status,
+            headers = res.headers,
             data = res.data;
 
         if (status >= 200 && status < 300) {
@@ -760,7 +764,11 @@ function request(_ref) {
           }
           resolve(data);
         } else {
-          reject('http statusCode:' + status);
+          if (resDataType === 'json') {
+            data = (0, _utils.tryJsonParse)(data);
+          }
+          headers = (0, _utils.tryJsonParse)(headers);
+          reject({ data: data, headers: headers, status: status });
         }
       }
     });

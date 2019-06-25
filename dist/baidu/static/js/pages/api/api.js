@@ -579,6 +579,7 @@ var api = {
       sdk: 'alert',
       web: 'alert',
       wx: 'showModal',
+      qq: 'showModal',
       baidu: 'showModal',
       alipay: 'alert',
       weex: 'modal.alert'
@@ -590,6 +591,7 @@ var api = {
       sdk: 'cancelAnimationFrame',
       web: 'cancelAnimationFrame',
       wx: 'cancelAnimationFrame',
+      qq: 'cancelAnimationFrame',
       baidu: 'cancelAnimationFrame',
       weex: 'cancelAnimationFrame',
       alipay: 'cancelAnimationFrame'
@@ -601,6 +603,7 @@ var api = {
       sdk: 'canIUse',
       web: 'canIUse',
       wx: 'canIUse',
+      qq: 'canIUse',
       baidu: 'canIUse',
       weex: 'canIUse',
       alipay: 'canIUse'
@@ -612,6 +615,7 @@ var api = {
       sdk: 'inSDK',
       web: 'inSDK',
       wx: '',
+      qq: '',
       baidu: '',
       weex: ''
     }
@@ -621,6 +625,7 @@ var api = {
       sdk: 'chooseImage',
       web: 'chooseImage',
       wx: 'chooseImage',
+      qq: 'chooseImage',
       baidu: 'chooseImage',
       weex: '',
       alipay: 'chooseImage'
@@ -631,6 +636,7 @@ var api = {
       sdk: 'close',
       web: 'close',
       wx: 'navigateBack',
+      qq: 'navigateBack',
       baidu: 'navigateBack',
       weex: '',
       alipay: 'navigateBack'
@@ -641,6 +647,7 @@ var api = {
       sdk: 'confirm',
       web: 'confirm',
       wx: 'showModal',
+      qq: 'showModal',
       baidu: 'showModal',
       weex: 'modal.confirm',
       alipay: 'confirm'
@@ -651,6 +658,7 @@ var api = {
       sdk: 'getSystemInfo',
       web: 'getSystemInfo',
       wx: 'getSystemInfoSync',
+      qq: 'getSystemInfoSync',
       baidu: 'getSystemInfoSync',
       weex: 'getSystemInfo',
       alipay: 'getSystemInfoSync'
@@ -661,6 +669,7 @@ var api = {
       sdk: 'request',
       web: 'fetch',
       wx: 'request',
+      qq: 'request',
       baidu: 'request',
       weex: 'fetch',
       alipay: 'httpRequest'
@@ -671,6 +680,7 @@ var api = {
       sdk: 'getClipBoardData',
       web: 'getClipboardData',
       wx: 'getClipboardData',
+      qq: 'getClipboardData',
       baidu: 'getClipboardData',
       weex: 'clipboard.getString',
       alipay: 'getClipboard'
@@ -681,6 +691,7 @@ var api = {
       sdk: 'getLocationInfo',
       web: 'getCurrentPosition',
       wx: 'getLocation',
+      qq: 'getLocation',
       baidu: 'getLocation',
       weex: '',
       alipay: 'getLocation'
@@ -691,6 +702,7 @@ var api = {
       sdk: 'getComponentRect',
       web: 'getComputedStyle',
       wx: 'createSelectorQuery',
+      qq: 'createSelectorQuery',
       baidu: 'createSelectorQuery',
       weex: 'getComponentRect',
       alipay: ''
@@ -701,6 +713,7 @@ var api = {
       sdk: 'getStorage',
       web: 'localStorage.getItem',
       wx: 'getStorageSync',
+      qq: 'getStorageSync',
       baidu: 'getStorageSync',
       weex: 'storage.getItem',
       alipay: 'getStorageSync'
@@ -711,6 +724,7 @@ var api = {
       sdk: 'getSystemInfo',
       web: 'getSystemInfo',
       wx: 'getSystemInfo',
+      qq: 'getSystemInfo',
       baidu: 'getSystemInfo',
       weex: 'getSystemInfo',
       alipay: 'getSystemInfo'
@@ -721,6 +735,7 @@ var api = {
       sdk: 'initSocket',
       web: 'initSocket',
       wx: 'connectSocket',
+      qq: 'connectSocket',
       baidu: 'connectSocket',
       weex: '',
       alipay: 'connectSocket'
@@ -731,6 +746,7 @@ var api = {
       sdk: 'getQueryObjSync',
       web: 'location.href',
       wx: 'getLaunchOptionsSync',
+      qq: 'getLaunchOptionsSync',
       baidu: '',
       weex: 'weex.config.bundleUrl',
       alipay: ''
@@ -741,6 +757,7 @@ var api = {
       sdk: 'navigateBack',
       web: 'navigateBack',
       wx: 'navigateBack',
+      qq: 'navigateBack',
       baidu: 'navigateBack',
       weex: 'navigateBack',
       alipay: 'navigateBack'
@@ -751,6 +768,7 @@ var api = {
       sdk: 'navigateTo',
       web: 'navigateTo',
       wx: 'navigateTo',
+      qq: 'navigateTo',
       baidu: 'navigateTo',
       weex: 'navigateTo',
       alipay: 'navigateTo'
@@ -761,6 +779,7 @@ var api = {
       sdk: 'open',
       web: 'location.href',
       wx: 'navigateToMiniProgram',
+      qq: 'navigateToMiniProgram',
       baidu: 'navigateToSmartProgram',
       weex: 'navigator.push',
       alipay: 'navigateToMiniProgram'
@@ -771,6 +790,7 @@ var api = {
       sdk: 'request',
       web: 'fetch',
       wx: 'request',
+      qq: 'request',
       baidu: 'request',
       weex: 'fetch',
       alipay: 'httpRequest'
@@ -781,6 +801,7 @@ var api = {
       sdk: 'getSystemInfo',
       web: 'getSystemInfo',
       wx: 'getSystemInfoSync',
+      qq: 'getSystemInfoSync',
       baidu: 'getSystemInfoSync',
       weex: 'getSystemInfo',
       alipay: ''
@@ -791,6 +812,7 @@ var api = {
       sdk: 'redirectTo',
       web: 'router.replace',
       wx: 'redirectTo',
+      qq: 'redirectTo',
       baidu: 'redirectTo',
       weex: 'router.replace',
       alipay: 'redirectTo'
@@ -801,6 +823,7 @@ var api = {
       sdk: 'reload',
       web: 'location.reload',
       wx: '',
+      qq: '',
       baidu: '',
       weex: '',
       alipay: ''
@@ -811,6 +834,7 @@ var api = {
       sdk: 'removeStorage',
       web: 'localStorage.removeItem',
       wx: 'removeStorageSync',
+      qq: 'removeStorageSync',
       baidu: 'removeStorageSync',
       weex: 'storage.removeItem',
       alipay: 'removeStorageSync'
@@ -821,6 +845,7 @@ var api = {
       sdk: 'request',
       web: 'fetch',
       wx: 'request',
+      qq: 'request',
       baidu: 'request',
       weex: 'fetch',
       alipay: 'httpRequest'
@@ -832,6 +857,7 @@ var api = {
       sdk: 'setTimeout',
       web: 'requestAnimationFrame',
       wx: 'setTimeout',
+      qq: 'setTimeout',
       baidu: 'setTimeout',
       weex: 'requestAnimationFrame',
       alipay: 'requestAnimationFrame'
@@ -842,6 +868,7 @@ var api = {
       sdk: 'setClipBoardData',
       web: 'setClipBoardData',
       wx: 'setClipBoardData',
+      qq: 'setClipBoardData',
       baidu: 'setClipBoardData',
       weex: 'clipboard.setString',
       alipay: 'setClipboard'
@@ -852,6 +879,7 @@ var api = {
       sdk: 'setStorage',
       web: 'localStorage.setItem',
       wx: 'setStorageSync',
+      qq: 'setStorageSync',
       baidu: 'setStorageSync',
       weex: 'storage.setItem',
       alipay: 'setStorageSync'
@@ -862,6 +890,7 @@ var api = {
       sdk: 'setTitle',
       web: 'document.title',
       wx: 'setNavigationBarTitle',
+      qq: 'setNavigationBarTitle',
       baidu: 'setNavigationBarTitle',
       weex: '',
       alipay: 'setNavigationBar'
@@ -872,6 +901,7 @@ var api = {
       sdk: 'showToast',
       web: 'showToast',
       wx: 'showToast',
+      qq: 'showToast',
       baidu: 'showToast',
       weex: 'modal.toast',
       alipay: 'showToast'
@@ -1632,7 +1662,7 @@ var Method = function () {
         return;
       }
 
-      var method = _config.api[metName].baseOn.wx;
+      var method = _config.api[metName].baseOn.baidu;
       var result = swan.canIUse(method);
       cb(result);
     }
@@ -5505,13 +5535,13 @@ getLocationInfo.prototype.methodName = methodName;
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-bridge/apis/openPage/index.js":
+/***/ "./node_modules/chameleon-bridge/apis/open/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPage = openPage;
+exports.open = open;
 
 var _index = __webpack_require__("./node_modules/chameleon-bridge/core/index.js");
 
@@ -5520,7 +5550,7 @@ var _utils = __webpack_require__("./node_modules/chameleon-bridge/utils.js");
 var moduleName = 'cml';
 var methodName = 'openPage';
 
-function openPage(param) {
+function open(param) {
   /**
    * param: url, commonPatchParams, extraOptions
    */
@@ -5537,8 +5567,8 @@ function openPage(param) {
   }, function () {});
 }
 
-openPage.prototype.moduleName = moduleName;
-openPage.prototype.methodName = methodName;
+open.prototype.moduleName = moduleName;
+open.prototype.methodName = methodName;
 
 /***/ }),
 
@@ -5818,6 +5848,9 @@ function getSystemInfo(param, cb) {
      */
     // 兼容原始数据结构
     res.data.extraParams.os = res.data.os;
+    try {
+      res.data.extraParams.deviceModel = WXEnvironment && WXEnvironment.deviceModel || '';
+    } catch (e) {}
 
     var _res$data = res.data,
         deviceWidth = _res$data.deviceWidth,
@@ -6327,9 +6360,9 @@ var _location = __webpack_require__("./node_modules/chameleon-bridge/apis/locati
 
 var location = _interopRequireWildcard(_location);
 
-var _openPage = __webpack_require__("./node_modules/chameleon-bridge/apis/openPage/index.js");
+var _open = __webpack_require__("./node_modules/chameleon-bridge/apis/open/index.js");
 
-var openPage = _interopRequireWildcard(_openPage);
+var open = _interopRequireWildcard(_open);
 
 var _reload = __webpack_require__("./node_modules/chameleon-bridge/apis/reload/index.js");
 
@@ -6393,7 +6426,7 @@ var core = _interopRequireWildcard(_index3);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-exports.default = _extends({}, chooseImage, clipboard, close, location, openPage, reload, request, rollbackWeb, socket, storage, systemInfo, canIUse, getSDKInfo, title, query, getLaunchUrl, getComponentRect, ui, inSDK, getComponentRect, core);
+exports.default = _extends({}, chooseImage, clipboard, close, location, open, reload, request, rollbackWeb, socket, storage, systemInfo, canIUse, getSDKInfo, title, query, getLaunchUrl, getComponentRect, ui, inSDK, getComponentRect, core);
 
 /***/ }),
 
@@ -6507,8 +6540,8 @@ function isNeedApiPrefix(url) {
 }
 
 function addApiPrefix(url) {
-  if (process && process.env && "http://172.24.29.84:5556") {
-    return "http://172.24.29.84:5556" + url;
+  if (process && process.env && "http://172.24.29.96:5556") {
+    return "http://172.24.29.96:5556" + url;
   }
   return url;
 }

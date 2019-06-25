@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([78],{
+__CML__GLOBAL.webpackJsonp([75],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-tab-item/c-tab-item.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -22,16 +22,15 @@ var CTabsItem = function CTabsItem() {
   this.props = {
     tab: { //label labelStyle prefixIcon  suffixIcon
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: {}
     },
     inline: {
       type: Boolean,
       default: true
     },
     activeLabel: {
-      type: String
+      type: String,
+      default: ''
     },
     activeLabelStyle: {
       // 这个在微信中可以

@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([89],{
+__CML__GLOBAL.webpackJsonp([90],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=baidu&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/scroller/scroller.baidu.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -388,7 +388,9 @@ var Scroller = function () {
       }
     };
     this.data = {
-      cmtStyle: ''
+      cmtStyle: '',
+      scrollTopPx: 0,
+      scrollLeftPx: 0
     };
     this.computed = {
       wrapperStyle: function wrapperStyle() {
@@ -404,13 +406,14 @@ var Scroller = function () {
 
 
         return this.cmtStyle + this.cstyle;
+      }
+    };
+    this.watch = {
+      scrollTop: function scrollTop(v) {
+        this.scrollTopPx = (0, _index8.default)(v);
       },
-      scrollTopPx: function scrollTopPx() {
-        // scroll-top仅支持px
-        return (0, _index8.default)(this.scrollTop);
-      },
-      scrollLeftPx: function scrollLeftPx() {
-        return (0, _index8.default)(this.scrollLeft);
+      scrollLeft: function scrollLeft(v) {
+        this.scrollLeftPx = (0, _index8.default)(v);
       }
     };
     this.methods = {
@@ -489,6 +492,11 @@ var Scroller = function () {
                 }
 
               case 14:
+
+                _this2.scrollLeftPx = (0, _index8.default)(_this2.scrollLeft);
+                _this2.scrollTopPx = (0, _index8.default)(_this2.scrollTop);
+
+              case 16:
               case "end":
                 return _context.stop();
             }

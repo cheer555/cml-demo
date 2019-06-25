@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([84],{
+__CML__GLOBAL.webpackJsonp([81],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=alipay&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-checkbox-group/c-checkbox-group.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -7,8 +7,6 @@ __CML__GLOBAL.webpackJsonp([84],{
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _chameleonRuntime = __webpack_require__("./node_modules/chameleon-runtime/index.js");
 
@@ -18,75 +16,80 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Checkboxgroup = function () {
-  function Checkboxgroup() {
-    _classCallCheck(this, Checkboxgroup);
+var Checkboxgroup = function Checkboxgroup() {
+  _classCallCheck(this, Checkboxgroup);
 
-    this.props = {
-      option: {
-        type: Array,
-        default: []
-      },
-      position: {
-        type: String,
-        default: 'left'
-      },
-      horizontal: {
-        type: Boolean,
-        default: false
-      }
-    };
-    this.data = {};
-    this.computed = {
-      horizontalStyle: function horizontalStyle() {
-        if (this.horizontal) {
-          return 'display:inline-flex;flex-direction:row;align-items:center;flex-wrap:wrap;flex:1;';
-        }
-        return '';
-      },
-      subPosition: function subPosition() {
-        // 水平排列默认位置失效
-        if (this.position === 'right' && !this.horizontal) {
-          return 'right';
-        }
-        return 'left';
-      }
-    };
-    this.watch = {};
-    this.methods = {
-      valueChange: function valueChange(e) {
-        var groups = JSON.parse(JSON.stringify(this.option));
-        var value = groups[e.detail.index];
-        value = {
-          checked: e.detail.value,
-          label: value.label,
-          disabled: value.disabled
-        };
-        groups[e.detail.index] = value;
-        var selected = [];
-        groups.forEach(function (item) {
-          if (item.checked) {
-            selected.push(item.label);
-          }
-        });
-        this.$cmlEmit('groupchange', {
-          index: e.detail.index,
-          value: groups,
-          selected: selected
-        });
-      }
-    };
-  }
-
-  _createClass(Checkboxgroup, [{
-    key: 'mounted',
-    value: function mounted() {
-      this.checkList = JSON.parse(JSON.stringify(this.option));
+  this.props = {
+    option: {
+      type: Array,
+      default: [{}]
+    },
+    position: {
+      type: String,
+      default: 'left'
+    },
+    horizontal: {
+      type: Boolean,
+      default: false
+    },
+    uncheckIcon: {
+      type: String,
+      default: ''
+    },
+    checkedIcon: {
+      type: String,
+      default: ''
+    },
+    cstyle: {
+      type: String,
+      default: ''
+    },
+    itemStyle: {
+      type: String,
+      default: ''
     }
-  }]);
-
-  return Checkboxgroup;
-}();
+  };
+  this.data = {};
+  this.computed = {
+    horizontalStyle: function horizontalStyle() {
+      if (this.horizontal) {
+        return 'display:inline-flex;flex-direction:row;align-items:center;flex-wrap:wrap;flex:1;' + this.cstyle;
+      }
+      return this.cstyle;
+    },
+    subPosition: function subPosition() {
+      // 水平排列默认位置失效
+      if (this.position === 'right' && !this.horizontal) {
+        return 'right';
+      }
+      return 'left';
+    }
+  };
+  this.watch = {};
+  this.methods = {
+    valueChange: function valueChange(e) {
+      var groups = JSON.parse(JSON.stringify(this.option));
+      var value = groups[e.detail.index];
+      value = {
+        checked: e.detail.value,
+        label: value.label,
+        disabled: value.disabled
+      };
+      groups[e.detail.index] = value;
+      var selected = [];
+      groups.forEach(function (item) {
+        if (item.checked) {
+          selected.push(item.label);
+        }
+      });
+      this.$cmlEmit('groupchange', {
+        index: e.detail.index,
+        value: groups,
+        selected: selected
+      });
+    }
+  };
+};
 
 exports.default = new Checkboxgroup();
 

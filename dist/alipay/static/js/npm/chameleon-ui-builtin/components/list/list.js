@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([92],{
+__CML__GLOBAL.webpackJsonp([97],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=alipay&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/list/list.alipay.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -426,8 +426,10 @@ var List = function () {
                 windowRect = _context.sent;
 
                 query.exec(function (ret) {
-                  if (ret[0]) {
-                    var height = windowRect.viewportHeight - ret.top;
+                  var retData = ret[0];
+
+                  if (retData) {
+                    var height = windowRect.viewportHeight - retData.top;
                     me.cmtstyle = "height:" + height + "cpx;";
                   }
                 });

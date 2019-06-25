@@ -1,4 +1,4 @@
-<view class="cml-checkbox  cml-base cml-view cml-5ebca3b8">
+<view class="cml-checkbox  cml-base cml-view cml-5ebca3b8" style="{{computedCstyle}}">
   <view class="cml-checkbox-wrap  cml-base cml-view cml-5ebca3b8" onTap="_cmlEventProxy" data-eventtap="changeCheck">
     <view class="cml-checkbox-check  cml-base cml-view cml-5ebca3b8" style="{{checkStyle}}">
       <view class="{{ checkClass }}  cml-base cml-view cml-5ebca3b8">

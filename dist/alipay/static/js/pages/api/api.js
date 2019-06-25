@@ -5188,13 +5188,13 @@ getLocationInfo.prototype.methodName = methodName;
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-bridge/apis/openPage/index.js":
+/***/ "./node_modules/chameleon-bridge/apis/open/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPage = openPage;
+exports.open = open;
 
 var _index = __webpack_require__("./node_modules/chameleon-bridge/core/index.js");
 
@@ -5203,7 +5203,7 @@ var _utils = __webpack_require__("./node_modules/chameleon-bridge/utils.js");
 var moduleName = 'cml';
 var methodName = 'openPage';
 
-function openPage(param) {
+function open(param) {
   /**
    * param: url, commonPatchParams, extraOptions
    */
@@ -5220,8 +5220,8 @@ function openPage(param) {
   }, function () {});
 }
 
-openPage.prototype.moduleName = moduleName;
-openPage.prototype.methodName = methodName;
+open.prototype.moduleName = moduleName;
+open.prototype.methodName = methodName;
 
 /***/ }),
 
@@ -5501,6 +5501,9 @@ function getSystemInfo(param, cb) {
      */
     // 兼容原始数据结构
     res.data.extraParams.os = res.data.os;
+    try {
+      res.data.extraParams.deviceModel = WXEnvironment && WXEnvironment.deviceModel || '';
+    } catch (e) {}
 
     var _res$data = res.data,
         deviceWidth = _res$data.deviceWidth,
@@ -6010,9 +6013,9 @@ var _location = __webpack_require__("./node_modules/chameleon-bridge/apis/locati
 
 var location = _interopRequireWildcard(_location);
 
-var _openPage = __webpack_require__("./node_modules/chameleon-bridge/apis/openPage/index.js");
+var _open = __webpack_require__("./node_modules/chameleon-bridge/apis/open/index.js");
 
-var openPage = _interopRequireWildcard(_openPage);
+var open = _interopRequireWildcard(_open);
 
 var _reload = __webpack_require__("./node_modules/chameleon-bridge/apis/reload/index.js");
 
@@ -6076,7 +6079,7 @@ var core = _interopRequireWildcard(_index3);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-exports.default = _extends({}, chooseImage, clipboard, close, location, openPage, reload, request, rollbackWeb, socket, storage, systemInfo, canIUse, getSDKInfo, title, query, getLaunchUrl, getComponentRect, ui, inSDK, getComponentRect, core);
+exports.default = _extends({}, chooseImage, clipboard, close, location, open, reload, request, rollbackWeb, socket, storage, systemInfo, canIUse, getSDKInfo, title, query, getLaunchUrl, getComponentRect, ui, inSDK, getComponentRect, core);
 
 /***/ }),
 
@@ -6190,8 +6193,8 @@ function isNeedApiPrefix(url) {
 }
 
 function addApiPrefix(url) {
-  if (process && process.env && "http://172.24.29.84:5556") {
-    return "http://172.24.29.84:5556" + url;
+  if (process && process.env && "http://172.24.29.96:5556") {
+    return "http://172.24.29.96:5556" + url;
   }
   return url;
 }

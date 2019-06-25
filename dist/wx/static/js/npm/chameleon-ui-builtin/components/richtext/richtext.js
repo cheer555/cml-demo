@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([22],{
+__CML__GLOBAL.webpackJsonp([91],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/richtext/richtext.wx.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -353,72 +353,6 @@ exports.default = _chameleonRuntime2.default.createComponent(exports.default).ge
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./node_modules/chameleon-ui-builtin/components/richtext/richHandle.js":
-/***/ (function(module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = richHandle;
-function richHandle(richData) {
-  var richConf = richData.rich_message,
-      richTexts = richData.message.split('');
-  //切割文本
-  richTexts = richTexts.map(function (item) {
-    return {
-      text: item,
-      index: -1
-    };
-  });
-  // 过滤错误配置
-  richConf = richConf.filter(function (item) {
-    var start = item.start,
-        end = item.end;
-
-    start = parseInt(start, 10);
-    end = parseInt(end, 10);
-    return !isNaN(start) && !isNaN(end) && start <= end;
-  });
-  // 遍历获取文本对应样式index
-  richConf.forEach(function (item, index) {
-    var start = item.start,
-        end = item.end;
-
-    start = parseInt(start, 10);
-    end = parseInt(end, 10);
-    start = start < 0 ? 0 : start;
-    end = end > richTexts.length - 1 ? richTexts.length - 1 : end;
-    for (var i = start; i <= end; i++) {
-      richTexts[i].index = index;
-    }
-  });
-  var start = 0,
-      end = richTexts.length;
-  var richList = [];
-  while (start < end) {
-    var i = start;
-    var rIndex = richTexts[i].index;
-    var conf = rIndex === -1 ? null : richConf[rIndex];
-    var ri = {
-      font_size: conf && conf.font_size,
-      color: conf && conf.color,
-      text: ''
-    };
-    for (; i < end; i++) {
-      if (richTexts[i].index !== rIndex) {
-        break;
-      }
-      ri.text += richTexts[i].text;
-    }
-    richList.push(ri);
-    start = i;
-  }
-
-  return richList;
-}
 
 /***/ }),
 

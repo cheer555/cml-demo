@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([23],{
+__CML__GLOBAL.webpackJsonp([109],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -376,7 +376,7 @@ var Button = function Button() {
     },
     size: {
       type: String,
-      default: "stretch"
+      default: "auto"
     },
     width: {
       type: Number,
@@ -550,52 +550,6 @@ exports.default = _chameleonRuntime2.default.createComponent(exports.default).ge
 var __cml__style0 = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/cml-extract-css-webpack-plugin/dist/loader.js?{\"omit\":1,\"remove\":true}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/vue-style-loader/index.js!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"platform\":\"miniapp\",\"cmlType\":\"wx\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/postcss-loader/lib/index.js?{\"sourceMap\":false,\"config\":{\"path\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/configs/postcss/wx/.postcssrc.js\"}}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/less-loader/dist/cjs.js?{\"sourceMap\":false}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-css-loader/index.js?{\"media\":true,\"cmlType\":\"wx\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=styles&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml");
 var __cml__script = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=wx&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/chameleon-ui-builtin/components/button/button.wx.cml");
 
-
-/***/ }),
-
-/***/ "./node_modules/chameleon-ui-builtin/components/button/util.js":
-/***/ (function(module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.transCls = transCls;
-function transCls(base, ctx) {
-  var type = ctx.type,
-      disabled = ctx.disabled,
-      size = ctx.size,
-      hover = ctx.hover,
-      hasWidth = ctx.hasWidth;
-
-
-  var classList = [base];
-
-  if (hover) {
-    classList.push(base + '-active');
-  }
-
-  if (!!~'red|orange|white|green'.indexOf(type)) {
-    classList.push(base + '-' + type);
-
-    if (hover) {
-      classList.push(base + '-' + type + '-active');
-    }
-
-    if (disabled) {
-      classList.push(base + '-' + type + '-disable');
-    }
-  }
-
-  if (!!~'full|big|medium|small|stretch|auto'.indexOf(size) && !hasWidth) {
-    classList.push(base + '-' + size);
-  }
-
-  if (disabled) {
-    classList.push(base + '-disable');
-  }
-
-  return classList.join(' ');
-}
 
 /***/ })
 

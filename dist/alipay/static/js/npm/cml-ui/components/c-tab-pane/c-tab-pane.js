@@ -1,5 +1,5 @@
 var __CML__GLOBAL = require("../../../../manifest.js");
-__CML__GLOBAL.webpackJsonp([76],{
+__CML__GLOBAL.webpackJsonp([73],{
 
 /***/ "../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/babel-loader/lib/index.js?{\"filename\":\"/Users/didi/.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/chameleon.js\"}!../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-loader/src/selector.js?type=script&index=0&fileType=component&media=dev&cmlType=alipay&isInjectBaseStyle=true&check={\"enable\":true,\"enableTypes\":[]}!./node_modules/cml-ui/components/c-tab-pane/c-tab-pane.cml":
 /***/ (function(module, exports, __webpack_require__) {
@@ -22,13 +22,11 @@ var CTabPane = function CTabPane() {
   this.props = {
     tabs: { //label labelStyle prefixIcon  suffixIcon
       type: Array,
-      default: function _default() {
-        return [];
-      }
+      default: [{}]
     },
     activeLabel: {
-      type: [Number, String],
-      required: true
+      type: String,
+      default: ''
     }
 
   };

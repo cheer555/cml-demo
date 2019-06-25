@@ -5100,7 +5100,7 @@ function addApiPrefix(url, domainkey) {
   } else {
     // 老版本配置apiPrefix
     if (true) {
-      return "http://172.24.29.84:5556" + url;
+      return "http://172.24.29.96:5556" + url;
     }
   }
 }
@@ -5108,7 +5108,9 @@ function addApiPrefix(url, domainkey) {
 function tryJsonParse(some) {
   // 这里eslint提示也先别删除\[\]
   if (isStr(some) && /[\{\[].*[\}\]]/.test(some)) {
-    some = JSON.parse(some);
+    try {
+      some = JSON.parse(some);
+    } catch (err) {}
   }
   return some;
 }
@@ -5144,6 +5146,12 @@ function getOpenObj(url) {
       weixin_path = _queryObj$weixin_path === undefined ? '' : _queryObj$weixin_path,
       _queryObj$weixin_envV = queryObj.weixin_envVersion,
       weixin_envVersion = _queryObj$weixin_envV === undefined ? '' : _queryObj$weixin_envV,
+      _queryObj$qq_appid = queryObj.qq_appid,
+      qq_appid = _queryObj$qq_appid === undefined ? '' : _queryObj$qq_appid,
+      _queryObj$qq_path = queryObj.qq_path,
+      qq_path = _queryObj$qq_path === undefined ? '' : _queryObj$qq_path,
+      _queryObj$qq_envVersi = queryObj.qq_envVersion,
+      qq_envVersion = _queryObj$qq_envVersi === undefined ? '' : _queryObj$qq_envVersi,
       _queryObj$baidu_appid = queryObj.baidu_appid,
       baidu_appid = _queryObj$baidu_appid === undefined ? '' : _queryObj$baidu_appid,
       _queryObj$baidu_path = queryObj.baidu_path,
@@ -5160,7 +5168,7 @@ function getOpenObj(url) {
       weex_path = _queryObj$weex_path === undefined ? '' : _queryObj$weex_path,
       _queryObj$cml_addr = queryObj.cml_addr,
       cml_addr = _queryObj$cml_addr === undefined ? '' : _queryObj$cml_addr,
-      extraData = _objectWithoutProperties(queryObj, ['path', 'envVersion', 'weixin_appid', 'weixin_path', 'weixin_envVersion', 'baidu_appid', 'baidu_path', 'baidu_envVersion', 'alipay_appid', 'alipay_path', 'alipay_envVersion', 'weex_path', 'cml_addr']);
+      extraData = _objectWithoutProperties(queryObj, ['path', 'envVersion', 'weixin_appid', 'weixin_path', 'weixin_envVersion', 'qq_appid', 'qq_path', 'qq_envVersion', 'baidu_appid', 'baidu_path', 'baidu_envVersion', 'alipay_appid', 'alipay_path', 'alipay_envVersion', 'weex_path', 'cml_addr']);
 
   var objTreated = {
     weex: cml_addr ? webUrlWithoutQuery + '?weex_path=' + weex_path + queryStringify(extraData) + '&cml_addr=' + cml_addr : null,
@@ -5170,6 +5178,12 @@ function getOpenObj(url) {
       path: weixin_path || path,
       extraData: extraData,
       envVersion: weixin_envVersion || envVersion
+    },
+    qq: {
+      appId: qq_appid,
+      path: qq_path || path,
+      extraData: extraData,
+      envVersion: qq_envVersion || envVersion
     },
     alipay: {
       appId: alipay_appid,
@@ -6827,16 +6841,16 @@ function createPage(options) {
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-runtime/src/platform/alipay/core/OptTransformer.js":
+/***/ "./node_modules/chameleon-runtime/src/platform/alipay/core/VmAdapter.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _MiniOptTransformer2 = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/MiniOptTransformer.js");
+var _MiniVmAdapter2 = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/MiniVmAdapter.js");
 
-var _MiniOptTransformer3 = _interopRequireDefault(_MiniOptTransformer2);
+var _MiniVmAdapter3 = _interopRequireDefault(_MiniVmAdapter2);
 
 var _alipayMixins = __webpack_require__("../../../.nvm/versions/node/v10.3.0/lib/node_modules/chameleon-tool/node_modules/chameleon-mixins/alipay-mixins.js");
 
@@ -6850,13 +6864,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OptTransformer = function (_MiniOptTransformer) {
-  _inherits(OptTransformer, _MiniOptTransformer);
+var VmAdapter = function (_MiniVmAdapter) {
+  _inherits(VmAdapter, _MiniVmAdapter);
 
-  function OptTransformer(config) {
-    _classCallCheck(this, OptTransformer);
+  function VmAdapter(config) {
+    _classCallCheck(this, VmAdapter);
 
-    var _this = _possibleConstructorReturn(this, (OptTransformer.__proto__ || Object.getPrototypeOf(OptTransformer)).call(this, config));
+    var _this = _possibleConstructorReturn(this, (VmAdapter.__proto__ || Object.getPrototypeOf(VmAdapter)).call(this, config));
 
     _this.platform = 'alipay';
     _this.baseMixins = _alipayMixins2.default.mixins;
@@ -6864,10 +6878,10 @@ var OptTransformer = function (_MiniOptTransformer) {
     return _this;
   }
 
-  return OptTransformer;
-}(_MiniOptTransformer3.default);
+  return VmAdapter;
+}(_MiniVmAdapter3.default);
 
-exports.default = OptTransformer;
+exports.default = VmAdapter;
 
 /***/ }),
 
@@ -6917,13 +6931,13 @@ var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platf
 
 var _lifecycle2 = _interopRequireDefault(_lifecycle);
 
-var _OptTransformer = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/OptTransformer.js");
+var _VmAdapter = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/VmAdapter.js");
 
-var _OptTransformer2 = _interopRequireDefault(_OptTransformer);
+var _VmAdapter2 = _interopRequireDefault(_VmAdapter);
 
-var _RuntimeWidget = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/RuntimeWidget.js");
+var _MiniRuntimeCore = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/MiniRuntimeCore.js");
 
-var _RuntimeWidget2 = _interopRequireDefault(_RuntimeWidget);
+var _MiniRuntimeCore2 = _interopRequireDefault(_MiniRuntimeCore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6943,18 +6957,18 @@ var App = exports.App = function (_BaseCtor) {
 
     _this.cmlType = 'alipay';
 
-    var runtimeWidget = new _RuntimeWidget2.default({
+    var runtimeCore = new _MiniRuntimeCore2.default({
       polyHooks: _lifecycle2.default.get('alipay.app.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
 
-    _this.initOptTransformer(_OptTransformer2.default, {
+    _this.initVmAdapter(_VmAdapter2.default, {
       type: 'app',
-      builtinMixins: {
+      runtimeMixins: {
         onLaunch: function onLaunch() {
           // 初始化
-          runtimeWidget.setContext(this).init().start('app-view-render');
+          runtimeCore.setContext(this).init().start('app-view-render');
         }
       },
       needResolveAttrs: ['methods'],
@@ -6989,13 +7003,13 @@ var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platf
 
 var _lifecycle2 = _interopRequireDefault(_lifecycle);
 
-var _OptTransformer = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/OptTransformer.js");
+var _VmAdapter = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/VmAdapter.js");
 
-var _OptTransformer2 = _interopRequireDefault(_OptTransformer);
+var _VmAdapter2 = _interopRequireDefault(_VmAdapter);
 
-var _RuntimeWidget = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/RuntimeWidget.js");
+var _MiniRuntimeCore = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/MiniRuntimeCore.js");
 
-var _RuntimeWidget2 = _interopRequireDefault(_RuntimeWidget);
+var _MiniRuntimeCore2 = _interopRequireDefault(_MiniRuntimeCore);
 
 var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 
@@ -7017,18 +7031,18 @@ var Component = exports.Component = function (_BaseCtor) {
 
     _this.cmlType = 'alipay';
 
-    var runtimeWidget = new _RuntimeWidget2.default({
+    var runtimeCore = new _MiniRuntimeCore2.default({
       polyHooks: _lifecycle2.default.get('alipay.component.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
 
-    _this.initOptTransformer(_OptTransformer2.default, {
+    _this.initVmAdapter(_VmAdapter2.default, {
       type: 'component',
-      builtinMixins: {
+      runtimeMixins: {
         didMount: function didMount() {
           // 初始化
-          runtimeWidget.setContext(this).init().initRefs().start('component-view-render');
+          runtimeCore.setContext(this).init().start('component-view-render');
         },
         didUpdate: function didUpdate(preProps) {
           var _this2 = this;
@@ -7045,7 +7059,7 @@ var Component = exports.Component = function (_BaseCtor) {
         },
         didUnmount: function didUnmount() {
           // stop
-          runtimeWidget.setContext(this).destory();
+          runtimeCore.setContext(this).destory();
         }
       },
       hooks: _lifecycle2.default.get('alipay.component.hooks'),
@@ -7117,13 +7131,13 @@ var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platf
 
 var _lifecycle2 = _interopRequireDefault(_lifecycle);
 
-var _OptTransformer = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/OptTransformer.js");
+var _VmAdapter = __webpack_require__("./node_modules/chameleon-runtime/src/platform/alipay/core/VmAdapter.js");
 
-var _OptTransformer2 = _interopRequireDefault(_OptTransformer);
+var _VmAdapter2 = _interopRequireDefault(_VmAdapter);
 
-var _RuntimeWidget = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/RuntimeWidget.js");
+var _MiniRuntimeCore = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/MiniRuntimeCore.js");
 
-var _RuntimeWidget2 = _interopRequireDefault(_RuntimeWidget);
+var _MiniRuntimeCore2 = _interopRequireDefault(_MiniRuntimeCore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7143,26 +7157,38 @@ var Page = exports.Page = function (_BaseCtor) {
 
     _this.cmlType = 'alipay';
 
-    var runtimeWidget = new _RuntimeWidget2.default({
+    var runtimeCore = new _MiniRuntimeCore2.default({
       polyHooks: _lifecycle2.default.get('alipay.page.polyHooks'),
       platform: _this.cmlType,
       options: _this.options
     });
 
-    _this.initOptTransformer(_OptTransformer2.default, {
+    _this.initVmAdapter(_VmAdapter2.default, {
       options: _this.options,
       type: 'page',
-      builtinMixins: {
+      runtimeMixins: {
         onLoad: function onLoad() {
           // 初始化
-          runtimeWidget.setContext(this).init().start('page-view-render');
+          runtimeCore.setContext(this).init().start('page-view-render');
         },
-        onReady: function onReady() {
-          runtimeWidget.setContext(this).initRefs();
-        },
+        onReady: function onReady() {},
         onUnload: function onUnload() {
           // stop
-          runtimeWidget.setContext(this).destory();
+          runtimeCore.setContext(this).destory();
+        },
+        onPullDownRefresh: function onPullDownRefresh() {
+          var path = this.route;
+
+          this.$cmlEventBus.emit(path + '_onPullDownRefresh', {
+            path: path
+          });
+        },
+        onReachBottom: function onReachBottom() {
+          var path = this.route;
+
+          this.$cmlEventBus.emit(path + '_onReachBottom', {
+            path: path
+          });
         }
       },
       needResolveAttrs: ['methods'],
@@ -7208,12 +7234,12 @@ var BaseCtor = function () {
   }
 
   _createClass(BaseCtor, [{
-    key: 'initOptTransformer',
-    value: function initOptTransformer(OptTransformer, config) {
-      var optTransformer = new OptTransformer(_extends({
+    key: 'initVmAdapter',
+    value: function initVmAdapter(VmAdapter, config) {
+      var vmAdapter = new VmAdapter(_extends({
         options: this.options
       }, config));
-      this.options = optTransformer.getOptions();
+      this.options = vmAdapter.getOptions();
     }
   }, {
     key: 'getOptions',
@@ -7229,7 +7255,7 @@ exports.default = BaseCtor;
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/BaseOptionsTransformer.js":
+/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/BaseVmAdapter.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
@@ -7245,14 +7271,14 @@ var _warn = __webpack_require__("./node_modules/chameleon-runtime/src/platform/c
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // options transform 基类
-var BaseOptionsTransformer = function () {
-  function BaseOptionsTransformer(config) {
-    _classCallCheck(this, BaseOptionsTransformer);
+var BaseVmAdapter = function () {
+  function BaseVmAdapter(config) {
+    _classCallCheck(this, BaseVmAdapter);
 
     this.type = config.type;
     this.options = config.options;
     this.injectMixins = config.injectMixins || [];
-    this.builtinMixins = config.builtinMixins;
+    this.runtimeMixins = config.runtimeMixins;
     this.hooks = config.hooks;
     this.hooksMap = config.hooksMap;
     this.polyHooks = config.polyHooks;
@@ -7265,429 +7291,30 @@ var BaseOptionsTransformer = function () {
     }
   }
 
-  _createClass(BaseOptionsTransformer, [{
+  _createClass(BaseVmAdapter, [{
     key: 'getOptions',
     value: function getOptions() {
       return this.options;
     }
   }]);
 
-  return BaseOptionsTransformer;
+  return BaseVmAdapter;
 }();
 
-exports.default = BaseOptionsTransformer;
+exports.default = BaseVmAdapter;
 
 /***/ }),
 
-/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/MiniOptTransformer.js":
+/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/MiniRuntimeCore.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _BaseOptionsTransformer = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/BaseOptionsTransformer.js");
-
-var _BaseOptionsTransformer2 = _interopRequireDefault(_BaseOptionsTransformer);
-
-var _util = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/util.js");
-
-var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
-
-var _resolve = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/resolve.js");
-
-var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
-
-var _KEY = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/KEY.js");
-
-var _KEY2 = _interopRequireDefault(_KEY);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// 各种小程序options transform 基类
-var MiniOptTransformer = function (_BaseOptionsTransform) {
-  _inherits(MiniOptTransformer, _BaseOptionsTransform);
-
-  function MiniOptTransformer(config) {
-    _classCallCheck(this, MiniOptTransformer);
-
-    //小程序特有
-    var _this = _possibleConstructorReturn(this, (MiniOptTransformer.__proto__ || Object.getPrototypeOf(MiniOptTransformer)).call(this, config));
-
-    _this.needPropsHandler = config.needPropsHandler;
-
-    _this.needResolveAttrs = config.needResolveAttrs;
-    _this.needTransformProperties = config.needTransformProperties;
-    return _this;
-  }
-
-  _createClass(MiniOptTransformer, [{
-    key: 'init',
-    value: function init() {
-      this.propsName = this.platform ? _KEY2.default.get(this.platform + '.props') : '';
-
-      this.needPropsHandler && this.initProps(this.options);
-      // 生命周期映射
-      (0, _util.transferLifecycle)(this.options, this.hooksMap);
-      this.handleMixins(this.options);
-
-      // 扩展各端多态生命周期
-      this.extendPolyHooks();
-
-      // init 顺序很重要
-      // this.mergeInjectedMixins()
-      this.mergeBuiltinMixins();
-      this.resolveOptions();
-      this.transformHooks();
-      this.needResolveAttrs && this.resolveAttrs();
-      this.needTransformProperties && this.transformProperties();
-
-      if (this.platform === 'alipay') {
-        delete this.options['computed'];
-      }
-    }
-
-    /**
-       * 处理组件props属性
-       * @param  {Object} vmObj 组件options
-       * @return {[type]}     [description]
-       */
-
-  }, {
-    key: 'initProps',
-    value: function initProps(vmObj) {
-      var _this2 = this;
-
-      if (!vmObj['props']) return;
-
-      Object.getOwnPropertyNames(vmObj['props']).forEach(function (name) {
-        var prop = vmObj['props'][name];
-        // Number: 0
-        // Boolean: false
-        // Array: false
-        // String: ''
-        // Object: null
-        // null: null
-        function make(type) {
-          if (!knowType(type)) {
-            return;
-          }
-
-          switch (type) {
-            case Number:
-              prop = vmObj['props'][name] = {
-                type: Number,
-                default: 0
-              };
-              break;
-            case Boolean:
-              prop = vmObj['props'][name] = {
-                type: Boolean,
-                default: false
-              };
-              break;
-            case Array:
-              prop = vmObj['props'][name] = {
-                type: Array,
-                default: []
-              };
-              break;
-            case String:
-              prop = vmObj['props'][name] = {
-                type: String,
-                default: ''
-              };
-              break;
-            case Object:
-              prop = vmObj['props'][name] = {
-                type: Object,
-                default: null
-              };
-              break;
-            case null:
-              prop = vmObj['props'][name] = {
-                type: null,
-                default: null
-              };
-              break;
-            default:
-              break;
-          }
-        }
-
-        function knowType(type) {
-          return type === Number || type === Boolean || type === Array || type === String || type === Object || type === null;
-        }
-
-        // 处理 props = { a: String, b: Boolean }
-        make(prop);
-
-        if ((0, _type.type)(prop) === 'Object') {
-          if (_this2.platform === 'alipay') {
-            if (!prop.hasOwnProperty('default')) {
-              // alipay 处理 // 处理 props = { a: {type:String}, b: {type:Boolean} }
-              make(prop.type);
-            }
-
-            vmObj['props'][name] = prop['default'];
-          } else {
-            (0, _util.rename)(vmObj['props'][name], 'default', 'value');
-          }
-        }
-      });
-
-      if (this.platform !== 'alipay') {
-        (0, _util.rename)(vmObj, 'props', 'properties');
-      }
-
-      function check(value, type) {
-
-        if (typeof value === 'undefined') {
-          console.error(prop + '\u9700\u8981\u4F20\u9ED8\u8BA4\u503C');
-          return false;
-        }
-        // todo type 校验
-      }
-    }
-  }, {
-    key: 'handleMixins',
-    value: function handleMixins(VMObj) {
-      var _this3 = this;
-
-      if (!VMObj.mixins) return;
-
-      var mixins = VMObj.mixins;
-
-      mixins.forEach(function (mix) {
-        // 生命周期映射
-        (0, _util.transferLifecycle)(mix, _this3.hooksMap);
-      });
-    }
-
-    /**
-     * 小程序端差异化生命周期 hooks mixins
-     */
-
-  }, {
-    key: 'extendPolyHooks',
-    value: function extendPolyHooks() {
-      var _this4 = this;
-
-      var methods = this.options.methods;
-
-      if (!methods) {
-        return;
-      }
-
-      this.polyHooks.forEach(function (hook) {
-        if ((0, _type.type)(methods[hook]) === 'Function') {
-          if ((0, _type.type)(_this4.options[hook]) === 'Array') {
-            _this4.options[hook].push(methods[hook]);
-          } else {
-            _this4.options[hook] = [methods[hook]];
-          }
-          delete methods[hook];
-        }
-      });
-    }
-  }, {
-    key: 'mergeInjectedMixins',
-    value: function mergeInjectedMixins() {
-      this.options.mixins = this.options.mixins ? this.options.mixins.concat(this.injectMixins) : this.injectMixins;
-    }
-  }, {
-    key: 'mergeBuiltinMixins',
-    value: function mergeBuiltinMixins() {
-      var btMixin = [this.baseMixins, this.builtinMixins].filter(function (item) {
-        return item;
-      });
-
-      this.options.mixins = this.options.mixins ? btMixin.concat(this.options.mixins) : btMixin;
-    }
-  }, {
-    key: 'resolveOptions',
-    value: function resolveOptions() {
-      var self = this;
-      var extractMixins = function extractMixins(mOptions, options) {
-        if (options.mixins) {
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
-          try {
-            for (var _iterator = options.mixins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var mix = _step.value;
-
-              extractMixins(mOptions, mix);
-            }
-          } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
-          }
-        }
-        mergeMixins(mOptions, options);
-      };
-
-      var mergeMixins = function mergeMixins(parent, child) {
-        for (var key in child) {
-          if (self.hooks.indexOf(key) > -1) {
-            (0, _resolve.mergeHooks)(parent, child, key);
-          } else if (key === 'data') {
-            (0, _resolve.mergeData)(parent, child, key);
-          } else if (testProps(key)) {
-            (0, _resolve.mergeSimpleProps)(parent, child, key);
-          } else if (key === 'watch') {
-            (0, _resolve.mergeWatch)(parent, child, key);
-          } else if (key !== 'mixins') {
-            (0, _resolve.mergeDefault)(parent, child, key);
-          }
-        }
-      };
-
-      var testProps = function testProps(key) {
-        var regExp = new RegExp('computed|methods|proto|' + self.propsName);
-        return regExp.test(key);
-      };
-
-      var newOptions = {};
-      extractMixins(newOptions, this.options);
-      this.options = newOptions;
-    }
-  }, {
-    key: 'transformHooks',
-    value: function transformHooks() {
-      if (!this.hooks || !this.hooks.length) return;
-      var self = this;
-      this.hooks.forEach(function (key) {
-        var hooksArr = self.options[key];
-        hooksArr && (self.options[key] = function () {
-          var result = void 0;
-          var asyncQuene = [];
-
-          // 多态生命周期需要统一回调参数
-          // if (self.polyHooks.indexOf(key) > -1) {
-          //   let res = args[0]
-          //   if (type(res) !== 'Object') {
-          //     res = {
-          //       'detail': args[0]
-          //     }
-          //   }
-          //   args = [res]
-          // }
-
-          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-          }
-
-          if ((0, _type.type)(hooksArr) === 'Function') {
-            result = hooksArr.apply(this, args);
-          } else if ((0, _type.type)(hooksArr) === 'Array') {
-            for (var i = 0; i < hooksArr.length; i++) {
-              if ((0, _type.type)(hooksArr[i]) === 'Function') {
-
-                result = hooksArr[i].apply(this, args);
-
-                // if (result && result.enableAsync) {
-                //   asyncQuene = hooksArr.slice(i + 1)
-                //   break
-                // }
-              }
-            }
-            // Promise.resolve().then(() => {
-            //   asyncQuene.forEach(fn => {
-            //     fn.apply(this, args)
-            //   })
-            // })
-          }
-          return result;
-        });
-      });
-    }
-  }, {
-    key: 'resolveAttrs',
-    value: function resolveAttrs() {
-      var _this5 = this;
-
-      if (!this.needResolveAttrs.length) return;
-      var keys = this.needResolveAttrs;
-      if ((0, _type.type)(keys) === 'String') {
-        keys = [keys];
-      }
-
-      keys.forEach(function (key) {
-        var value = _this5.options[key];
-        if ((0, _type.type)(value) !== 'Object') return;
-
-        (0, _util.extendWithIgnore)(_this5.options, value, _this5.usedHooks);
-        delete _this5.options[key];
-      });
-    }
-  }, {
-    key: 'transformProperties',
-    value: function transformProperties() {
-      var originProperties = this.options[this.propsName];
-      var newProps = {};
-
-      (0, _util.enumerableKeys)(originProperties).forEach(function (key) {
-        var rawFiled = originProperties[key];
-
-        var rawObserver = rawFiled.observer;
-        var newFiled = null;
-        if (typeof rawFiled === 'function') {
-          newFiled = {
-            type: rawFiled
-          };
-        } else {
-          newFiled = (0, _util.extend)({}, rawFiled);
-        }
-        newFiled.observer = function (value, oldValue) {
-          // 小程序内部数据使用了JSON.parse(JSON.stringify(x))的方式，导致每次引用都会变化
-          if (_mobx.extras.deepEqual(value, oldValue)) return;
-          this[key] = value;
-          typeof rawObserver === 'function' && rawObserver.call(this, value, oldValue);
-        };
-        newProps[key] = newFiled;
-      });
-
-      this.options[this.propsName] = newProps;
-    }
-  }]);
-
-  return MiniOptTransformer;
-}(_BaseOptionsTransformer2.default);
-
-exports.default = MiniOptTransformer;
-
-/***/ }),
-
-/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/RuntimeWidget.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7713,13 +7340,19 @@ var _diff = __webpack_require__("./node_modules/chameleon-runtime/src/platform/c
 
 var _diff2 = _interopRequireDefault(_diff);
 
+var _warn = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/warn.js");
+
+var _EventBus = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/EventBus.js");
+
+var _EventBus2 = _interopRequireDefault(_EventBus);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var RuntimeWidget = function () {
-  function RuntimeWidget(config) {
-    _classCallCheck(this, RuntimeWidget);
+var MiniRuntimeCore = function () {
+  function MiniRuntimeCore(config) {
+    _classCallCheck(this, MiniRuntimeCore);
 
     this.platform = config.platform || '';
     this.options = config.options;
@@ -7729,7 +7362,7 @@ var RuntimeWidget = function () {
     this.instance = _KEY2.default.get(this.platform + '.instance');
   }
 
-  _createClass(RuntimeWidget, [{
+  _createClass(MiniRuntimeCore, [{
     key: 'setOptions',
     value: function setOptions(options) {
       this.options = options;
@@ -7743,6 +7376,13 @@ var RuntimeWidget = function () {
   }, {
     key: 'init',
     value: function init() {
+      if (true) {
+        (0, _warn.invariant)(!!this.context, "【chameleon-runtime】runtime context should not undefined");
+      }
+
+      var context = this.context;
+
+      this.extendContext();
       // 属性
       this.initData();
 
@@ -7753,13 +7393,17 @@ var RuntimeWidget = function () {
       this.proxyHandler();
 
       // watch 属性mobx转换
-      this.watchesHandler();
+      initWatch(context, context.__cml_originOptions__.watch);
       return this;
+    }
+  }, {
+    key: 'extendContext',
+    value: function extendContext() {
+      this.context['$cmlEventBus'] = _EventBus2.default;
     }
   }, {
     key: 'initData',
     value: function initData() {
-      if (!this.context) return;
       var context = this.context;
       context.__cml_originOptions__ = this.options;
       // 清理函数列表
@@ -7778,43 +7422,9 @@ var RuntimeWidget = function () {
         context.__cml_data__ = (0, _util.extend)({}, context.data, context.__cml_computed__);
       }
     }
-
-    /**
-     *     **给小程序增加refs功能**
-     * 
-     * 在cml编译阶段给所有带有ref属性的元素添加 class="_cml_ref_lmc_" 
-     * 通过在Page的onLoad阶段以及comoponent的attached阶段初始化当前实例的$refs (执行时机选定标准: 可以通过createSelectorQuery选取元素之后)
-     * $refs只提供id, 不提供其他属性, $refs本身初始化是在onLoad阶段, 此时获得的节点数据(例如top), 并不会随页面滚动进行变化. 所以意义不大
-     * 通过this.$refs.ref获取元素class后在interface内部通过wxApi实时获取各元素信息
-     */
-
-  }, {
-    key: 'initRefs',
-    value: function initRefs() {
-      if (!this.context) return;
-      var context = this.context;
-      var query = this.platform === 'alipay' ? this.instance.createSelectorQuery() : this.instance.createSelectorQuery().in(context);
-
-      query.selectAll('._cml_ref_lmc_').boundingClientRect();
-      query.exec(function (res) {
-        context.$refs = {};
-        var doms = res[0];
-        if (!doms) {
-          return;
-        }
-        for (var i = 0; i < doms.length; i++) {
-          var refItem = doms[i];
-          context.$refs[refItem.id] = {
-            id: refItem.id
-          };
-        }
-      });
-      return this;
-    }
   }, {
     key: 'initInterface',
     value: function initInterface() {
-      if (!this.context) return;
       var context = this.context;
       // 构造 watch 能力
       context.$watch = watchFnFactory(context);
@@ -7831,7 +7441,6 @@ var RuntimeWidget = function () {
   }, {
     key: 'proxyHandler',
     value: function proxyHandler() {
-      if (!this.context) return;
       var context = this.context;
       context.__cml_ob_data__ = (0, _mobx.observable)(context.__cml_data__);
 
@@ -7841,38 +7450,6 @@ var RuntimeWidget = function () {
       (0, _util.enumerable)(context.__cml_ob_data__, origComputedKeys);
 
       (0, _util.proxy)(context, context.__cml_ob_data__);
-    }
-
-    /**
-     * watch 属性转换
-     * @param  {Object} context 上下文
-     * @return {[type]}       [description]
-     */
-
-  }, {
-    key: 'watchesHandler',
-    value: function watchesHandler() {
-      if (!this.context) return;
-      var context = this.context;
-      var options = context.__cml_originOptions__;
-
-      var watches = options.watch;
-
-      if ((0, _type.type)(watches) !== 'Object') {
-        return;
-      }
-
-      (0, _util.enumerableKeys)(watches).forEach(function (key) {
-        var handler = watches[key];
-        if ((0, _type.type)(handler) === 'Array') {
-          // mobx的reaction执行是倒序的，顾为保证watch正常次序，需倒序注册
-          for (var i = handler.length - 1; i >= 0; i--) {
-            context.$watch(key, handler[i]);
-          }
-        } else {
-          context.$watch(key, handler);
-        }
-      });
     }
   }, {
     key: 'addPageHooks',
@@ -7897,8 +7474,61 @@ var RuntimeWidget = function () {
     value: function start(name) {
       if (!this.context) return;
       var context = this.context;
+      var self = this;
       // 渲染更新监听
-      var disposer = autorunThrottle(context.$setData, name);
+      // const disposer = autorunThrottle(context.$setData, name)
+
+      /**
+       * [computed description]
+       * @return {[type]} [description]
+       */
+      function dataExprFn() {
+        var properties = context.__cml_originOptions__[self.propsName];
+        var propKeys = (0, _util.enumerableKeys)(properties);
+        // setData 的数据不包括 props
+        var obData = (0, _util.deleteProperties)(context.__cml_ob_data__, propKeys);
+
+        return (0, _toJS2.default)(obData);
+      }
+
+      var _cached = false;
+      var cacheData = void 0;
+      function sideEffect(curVal) {
+        var r = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        if ((0, _type.type)(r.schedule) !== 'Function') {
+          return;
+        }
+        // 缓存reaction
+        context.__cml_reaction__ = r;
+
+        var diffV = void 0;
+        if (_cached) {
+          diffV = (0, _diff2.default)(curVal, cacheData);
+
+          // emit 'beforeUpdate' hook ，第一次不触发
+          emit('beforeUpdate', context, curVal, cacheData, diffV);
+        } else {
+          _cached = true;
+          diffV = curVal;
+        }
+
+        if ((0, _type.type)(context.setData) === 'Function') {
+          context.setData(diffV, walkUpdatedCb(context));
+        }
+
+        cacheData = _extends({}, curVal);
+      }
+
+      var options = {
+        fireImmediately: true,
+        name: name,
+        onError: function onError() {
+          warn('RuntimeCore start reaction error!');
+        }
+      };
+
+      var disposer = (0, _mobx.reaction)(dataExprFn, sideEffect, options);
 
       context.__cml_disposerList__.push(disposer);
     }
@@ -7918,7 +7548,7 @@ var RuntimeWidget = function () {
     }
   }]);
 
-  return RuntimeWidget;
+  return MiniRuntimeCore;
 }();
 
 /**
@@ -7928,7 +7558,7 @@ var RuntimeWidget = function () {
  */
 
 
-exports.default = RuntimeWidget;
+exports.default = MiniRuntimeCore;
 function watchFnFactory(context) {
   return function (expr, handler) {
     var callback = handler.handler || handler;
@@ -7951,13 +7581,13 @@ function watchFnFactory(context) {
     function dataExprFn() {
       oldVal = curVal;
       curVal = exprType === 'string' ? (0, _util.getByPath)(context, expr) : expr.call(context);
-      if (handler.deep) {
-        curVal = (0, _toJS2.default)(curVal, false);
-      } else if ((0, _mobx.isObservableArray)(curVal)) {
-        // 强制访问，让数组被观察
-        curVal.peek();
-      }
-      return curVal;
+      // if (handler.deep) {
+      //   curVal = toJS(curVal, false)
+      // } else if (isObservableArray(curVal)) {
+      //   // 强制访问，让数组被观察
+      //   curVal = curVal.peek()
+      // }
+      return (0, _toJS2.default)(curVal);
     }
 
     function sideEffect(curVal, reaction) {
@@ -8127,39 +7757,691 @@ function transformComputed(context) {
 }
 
 /**
- * [autorunThrottle description]
- * @param  {[type]} fnc  [description]
- * @param  {[type]} name [description]
- * @return {function}      unwatch函数
+ * watch 属性转换
+ * @param  {Object} context 上下文
+ * @return {[type]}       [description]
  */
-function autorunThrottle(fnc, name) {
-  // 首次同步执行，之后异步处理
-  var isScheduled = false;
-  var first = true;
-  var r = new _mobx.Reaction(name, function () {
+function initWatch(vm, watch) {
+  if ((0, _type.type)(watch) !== 'Object') {
+    return;
+  }
 
-    if (!isScheduled) {
-      isScheduled = true;
-      if (first) {
-        reactionRunner();
-        first = false;
-      } else {
-        setTimeout(reactionRunner, 0);
+  for (var key in watch) {
+    var handler = watch[key];
+    if (Array.isArray(handler)) {
+      // mobx的reaction执行是倒序的，顾为保证watch正常次序，需倒序注册
+      for (var i = handler.length - 1; i >= 0; i--) {
+        createWatcher(vm, key, handler[i]);
       }
-    }
-  });
-  function reactionRunner() {
-    isScheduled = false;
-    if (!r.isDisposed) {
-      r.track(function () {
-
-        fnc(r);
-      });
+    } else {
+      createWatcher(vm, key, handler);
     }
   }
-  r.schedule();
-  return r.getDisposer();
 }
+
+function createWatcher(vm, expOrFn, handler, options) {
+  if ((0, _type.isPlainObject)(handler)) {
+    options = handler;
+    handler = handler.handler;
+  }
+  if (typeof handler === 'string') {
+    handler = vm[handler];
+  }
+  return vm.$watch(expOrFn, handler, options);
+}
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-runtime/src/platform/common/proto/MiniVmAdapter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseVmAdapter2 = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/proto/BaseVmAdapter.js");
+
+var _BaseVmAdapter3 = _interopRequireDefault(_BaseVmAdapter2);
+
+var _util = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/util.js");
+
+var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
+
+var _resolve = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/resolve.js");
+
+var _mobx = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
+
+var _KEY = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/KEY.js");
+
+var _KEY2 = _interopRequireDefault(_KEY);
+
+var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/lifecycle.js");
+
+var _lifecycle2 = _interopRequireDefault(_lifecycle);
+
+var _options = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/options.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// 各种小程序options transform 基类
+var MiniVmAdapter = function (_BaseVmAdapter) {
+  _inherits(MiniVmAdapter, _BaseVmAdapter);
+
+  function MiniVmAdapter(config) {
+    _classCallCheck(this, MiniVmAdapter);
+
+    //小程序特有
+    var _this = _possibleConstructorReturn(this, (MiniVmAdapter.__proto__ || Object.getPrototypeOf(MiniVmAdapter)).call(this, config));
+
+    _this.needPropsHandler = config.needPropsHandler;
+
+    _this.needResolveAttrs = config.needResolveAttrs;
+    _this.needTransformProperties = config.needTransformProperties;
+    return _this;
+  }
+
+  _createClass(MiniVmAdapter, [{
+    key: 'init',
+    value: function init() {
+      this.propsName = this.platform ? _KEY2.default.get(this.platform + '.props') : '';
+
+      // 处理 CML hooks
+      this.initHooks(this.options);
+
+      this.initOptions(this.options);
+      // 处理 mixins 
+      this.initMixins(this.options);
+
+      // 处理 生命周期多态
+      this.extendPolyHooks();
+
+      // init 顺序很重要、
+
+      // 添加各种mixins
+      // this.mergeInjectedMixins()
+      this.mergeBuiltinMixins();
+      // 处理 mixins
+      this.resolveOptions();
+      // 添加 生命周期代理
+      this.transformHooks();
+      // 处理 methods
+      this.needResolveAttrs && this.resolveAttrs();
+      // 处理 props 添加监听
+      this.needTransformProperties && this.transformProperties();
+
+      if (this.platform === 'alipay') {
+        delete this.options['computed'];
+      }
+    }
+
+    /**
+     * merge cml hooks from mixins
+     * handle hooks include:
+     * 1. cml hooks
+     * 2. platforms hooks in resolveOptions function
+     * @param {Object} options 
+     */
+
+  }, {
+    key: 'initHooks',
+    value: function initHooks(options) {
+      if (!options.mixins) return;
+      var cmlHooks = _lifecycle2.default.get('cml.hooks');
+      var mixins = options.mixins;
+
+      var _loop = function _loop(i) {
+        var mix = mixins[i];
+
+        Object.keys(mix).forEach(function (key) {
+          if (cmlHooks.indexOf(key) !== -1) {
+            !Array.isArray(mix[key]) && (mix[key] = [mix[key]]);
+
+            if ((0, _util.hasOwn)(options, key)) {
+              !Array.isArray(options[key]) && (options[key] = [options[key]]);
+
+              options[key] = mix[key].concat(options[key]);
+            } else {
+              options[key] = mix[key];
+            }
+            delete mix[key];
+          }
+        });
+      };
+
+      for (var i = mixins.length - 1; i >= 0; i--) {
+        _loop(i);
+      }
+    }
+  }, {
+    key: 'initOptions',
+    value: function initOptions(options) {
+      // 处理 props
+      this.needPropsHandler && this.handleProps(options);
+      // 处理 生命周期映射
+      (0, _util.transferLifecycle)(options, this.hooksMap);
+    }
+
+    /**
+     * 处理组件props属性
+     * @param  {Object} options 组件options
+     * @return {[type]}     [description]
+     */
+
+  }, {
+    key: 'handleProps',
+    value: function handleProps(options) {
+      var _this2 = this;
+
+      if (!options['props']) return;
+
+      Object.getOwnPropertyNames(options['props']).forEach(function (name) {
+        var prop = options['props'][name];
+        // Number: 0
+        // Boolean: false
+        // Array: false
+        // String: ''
+        // Object: null
+        // null: null
+        function make(type) {
+          if (!knowType(type)) {
+            return;
+          }
+
+          switch (type) {
+            case Number:
+              prop = options['props'][name] = {
+                type: Number,
+                default: 0
+              };
+              break;
+            case Boolean:
+              prop = options['props'][name] = {
+                type: Boolean,
+                default: false
+              };
+              break;
+            case Array:
+              prop = options['props'][name] = {
+                type: Array,
+                default: []
+              };
+              break;
+            case String:
+              prop = options['props'][name] = {
+                type: String,
+                default: ''
+              };
+              break;
+            case Object:
+              prop = options['props'][name] = {
+                type: Object,
+                default: null
+              };
+              break;
+            case null:
+              prop = options['props'][name] = {
+                type: null,
+                default: null
+              };
+              break;
+            default:
+              break;
+          }
+        }
+
+        function knowType(type) {
+          return type === Number || type === Boolean || type === Array || type === String || type === Object || type === null;
+        }
+
+        // 处理 props = { a: String, b: Boolean }
+        make(prop);
+
+        if ((0, _type.type)(prop) === 'Object') {
+          if (_this2.platform === 'alipay') {
+            if (!prop.hasOwnProperty('default')) {
+              // alipay 处理 // 处理 props = { a: {type:String}, b: {type:Boolean} }
+              make(prop.type);
+            }
+
+            options['props'][name] = prop['default'];
+          } else {
+            (0, _util.rename)(options['props'][name], 'default', 'value');
+          }
+        }
+      });
+
+      if (this.platform !== 'alipay') {
+        (0, _util.rename)(options, 'props', 'properties');
+      }
+
+      function check(value, type) {
+
+        if (typeof value === 'undefined') {
+          console.error(prop + '\u9700\u8981\u4F20\u9ED8\u8BA4\u503C');
+          return false;
+        }
+        // todo type 校验
+      }
+    }
+  }, {
+    key: 'initMixins',
+    value: function initMixins(options) {
+      var _this3 = this;
+
+      if (!options.mixins) return;
+
+      var mixins = options.mixins;
+
+      mixins.forEach(function (mix) {
+        _this3.initOptions(mix);
+      });
+    }
+
+    /**
+     * 小程序端差异化生命周期 hooks mixins
+     */
+
+  }, {
+    key: 'extendPolyHooks',
+    value: function extendPolyHooks() {
+      var _this4 = this;
+
+      var methods = this.options.methods;
+
+      if (!methods) {
+        return;
+      }
+
+      this.polyHooks.forEach(function (hook) {
+        if ((0, _type.type)(methods[hook]) === 'Function') {
+          if ((0, _type.type)(_this4.options[hook]) === 'Array') {
+            _this4.options[hook].push(methods[hook]);
+          } else {
+            _this4.options[hook] = [methods[hook]];
+          }
+          delete methods[hook];
+        }
+      });
+    }
+  }, {
+    key: 'mergeInjectedMixins',
+    value: function mergeInjectedMixins() {
+      this.options.mixins = this.options.mixins ? this.options.mixins.concat(this.injectMixins) : this.injectMixins;
+    }
+  }, {
+    key: 'mergeBuiltinMixins',
+    value: function mergeBuiltinMixins() {
+      var btMixin = [this.baseMixins, this.runtimeMixins].filter(function (item) {
+        return item;
+      });
+
+      this.options.mixins = this.options.mixins ? btMixin.concat(this.options.mixins) : btMixin;
+    }
+  }, {
+    key: 'resolveOptions',
+    value: function resolveOptions() {
+      var self = this;
+      var extractMixins = function extractMixins(mOptions, options) {
+        if (options.mixins) {
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (var _iterator = options.mixins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var _mix = _step.value;
+
+              extractMixins(mOptions, _mix);
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
+          }
+        }
+        mergeMixins(mOptions, options);
+      };
+
+      var mergeMixins = function mergeMixins(parent, child) {
+        for (var key in child) {
+          if (self.hooks.indexOf(key) > -1) {
+            (0, _resolve.mergeHooks)(parent, child, key);
+          } else if (key === 'data') {
+            (0, _resolve.mergeData)(parent, child, key);
+          } else if (testProps(key)) {
+            (0, _resolve.mergeSimpleProps)(parent, child, key);
+          } else if (key === 'watch') {
+            (0, _resolve.mergeWatch)(parent, child, key);
+          } else if (key !== 'mixins') {
+            (0, _resolve.mergeDefault)(parent, child, key);
+          }
+        }
+      };
+
+      var testProps = function testProps(key) {
+        var regExp = new RegExp('computed|methods|proto|' + self.propsName);
+        return regExp.test(key);
+      };
+
+      var newOptions = {};
+      extractMixins(newOptions, this.options);
+      this.options = newOptions;
+    }
+  }, {
+    key: 'transformHooks',
+    value: function transformHooks() {
+      if (!this.hooks || !this.hooks.length) return;
+      var self = this;
+      this.hooks.forEach(function (key) {
+        var hooksArr = self.options[key];
+        hooksArr && (self.options[key] = function () {
+          var result = void 0;
+          var asyncQuene = [];
+
+          // 多态生命周期需要统一回调参数
+          // if (self.polyHooks.indexOf(key) > -1) {
+          //   let res = args[0]
+          //   if (type(res) !== 'Object') {
+          //     res = {
+          //       'detail': args[0]
+          //     }
+          //   }
+          //   args = [res]
+          // }
+
+          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          if ((0, _type.type)(hooksArr) === 'Function') {
+            result = hooksArr.apply(this, args);
+          } else if ((0, _type.type)(hooksArr) === 'Array') {
+            for (var i = 0; i < hooksArr.length; i++) {
+              if ((0, _type.type)(hooksArr[i]) === 'Function') {
+
+                result = hooksArr[i].apply(this, args);
+
+                // if (result && result.enableAsync) {
+                //   asyncQuene = hooksArr.slice(i + 1)
+                //   break
+                // }
+              }
+            }
+            // Promise.resolve().then(() => {
+            //   asyncQuene.forEach(fn => {
+            //     fn.apply(this, args)
+            //   })
+            // })
+          }
+          return result;
+        });
+      });
+    }
+  }, {
+    key: 'resolveAttrs',
+    value: function resolveAttrs() {
+      var _this5 = this;
+
+      if (!this.needResolveAttrs.length) return;
+      var keys = this.needResolveAttrs;
+      if ((0, _type.type)(keys) === 'String') {
+        keys = [keys];
+      }
+
+      keys.forEach(function (key) {
+        var value = _this5.options[key];
+        if ((0, _type.type)(value) !== 'Object') return;
+
+        (0, _util.extendWithIgnore)(_this5.options, value, _this5.usedHooks);
+        delete _this5.options[key];
+      });
+    }
+  }, {
+    key: 'transformProperties',
+    value: function transformProperties() {
+      var originProperties = this.options[this.propsName];
+      var newProps = {};
+
+      (0, _util.enumerableKeys)(originProperties).forEach(function (key) {
+        var rawFiled = originProperties[key];
+
+        var rawObserver = rawFiled.observer;
+        var newFiled = null;
+        if (typeof rawFiled === 'function') {
+          newFiled = {
+            type: rawFiled
+          };
+        } else {
+          newFiled = (0, _util.extend)({}, rawFiled);
+        }
+        newFiled.observer = function (value, oldValue) {
+          // 小程序内部数据使用了JSON.parse(JSON.stringify(x))的方式，导致每次引用都会变化
+          if (_mobx.extras.deepEqual(value, oldValue)) return;
+          this[key] = value;
+          typeof rawObserver === 'function' && rawObserver.call(this, value, oldValue);
+        };
+        newProps[key] = newFiled;
+      });
+
+      this.options[this.propsName] = newProps;
+    }
+  }]);
+
+  return MiniVmAdapter;
+}(_BaseVmAdapter3.default);
+
+exports.default = MiniVmAdapter;
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/Event.js":
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ *  事件管理中心，用于监听，派发事件
+ */
+
+function call(callback, args) {
+  var fn = callback[0];
+  var context = callback[1];
+  args = callback[2].concat(args);
+  try {
+    return fn.apply(context, args);
+  } catch (e) {
+    setTimeout(function () {
+      throw e;
+    }, 0);
+  }
+}
+
+function arrayClone(arr, len) {
+  var copy = new Array(len);
+  while (len--) {
+    copy[len] = arr[len];
+  }
+  return copy;
+}
+
+function _emit(type) {
+  var listenerList = this._listenerMap[type];
+  if (!listenerList) {
+    return true;
+  }
+  var len = listenerList.cbs.length;
+  var cbs = arrayClone(listenerList.cbs, len);
+  var ret = true;
+
+  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  for (var index = 0; index < len; index++) {
+    if (!cbs[index]) {
+      continue;
+    }
+    ret = call(cbs[index], args) !== false && ret;
+  }
+  return !!ret;
+}
+
+var Event = function () {
+  function Event() {
+    _classCallCheck(this, Event);
+
+    this._listenerMap = {};
+  }
+
+  _createClass(Event, [{
+    key: "on",
+    value: function on(type, fn, context) {
+      var listenerList = this._listenerMap[type];
+      if (!listenerList) {
+        this._listenerMap[type] = listenerList = {
+          args: null,
+          cbs: []
+        };
+      }
+
+      for (var _len2 = arguments.length, rest = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+        rest[_key2 - 3] = arguments[_key2];
+      }
+
+      var callback = [fn, context, rest];
+      var args = listenerList.args;
+      if (args) {
+        call(callback, args);
+      } else {
+        listenerList.cbs.push(callback);
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(type, fn, context) {
+      for (var _len3 = arguments.length, rest = Array(_len3 > 3 ? _len3 - 3 : 0), _key3 = 3; _key3 < _len3; _key3++) {
+        rest[_key3 - 3] = arguments[_key3];
+      }
+
+      var fired = false;
+      function magic() {
+        this.un(type, magic);
+
+        if (!fired) {
+          fired = true;
+
+          for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+            args[_key4] = arguments[_key4];
+          }
+
+          fn.apply(context, args.concat(rest));
+        }
+      }
+
+      this.on(type, magic, this);
+    }
+  }, {
+    key: "un",
+    value: function un(type, fn) {
+      var listenerList = this._listenerMap[type];
+      if (!listenerList) {
+        return true;
+      }
+      if (arguments.length === 1) {
+        listenerList.cbs = [];
+      } else {
+        var cbs = listenerList.cbs;
+        var count = cbs.length;
+        while (count--) {
+          if (cbs[count] && cbs[count][0] === fn) {
+            cbs.splice(count, 1);
+          }
+        }
+      }
+    }
+  }, {
+    key: "emit",
+    value: function emit(type, args) {
+      return _emit.apply(this, arguments);
+    }
+  }, {
+    key: "done",
+    value: function done(type) {
+      for (var _len5 = arguments.length, args = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+        args[_key5 - 1] = arguments[_key5];
+      }
+
+      var listenerList = this._listenerMap[type];
+      if (!listenerList) {
+        this._listenerMap[type] = listenerList = {
+          args: args,
+          cbs: []
+        };
+      }
+      var cbs = listenerList.cbs;
+      var count = cbs.length;
+      _emit.apply(this, arguments);
+
+      listenerList.args = args;
+      listenerList.cbs = cbs.slice(count);
+    }
+  }, {
+    key: "undo",
+    value: function undo(type) {
+      var listenerList = this._listenerMap[type];
+      if (!listenerList) {
+        return false;
+      }
+      listenerList.args = null;
+    }
+  }]);
+
+  return Event;
+}();
+
+exports.default = Event;
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/EventBus.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Event = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/Event.js");
+
+var _Event2 = _interopRequireDefault(_Event);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var EventBus = new _Event2.default();
+
+exports.default = EventBus;
 
 /***/ }),
 
@@ -8192,6 +8474,10 @@ var KEY = {
     props: 'props'
   },
   baidu: {
+    instance: instanceAPI,
+    props: 'properties'
+  },
+  qq: {
     instance: instanceAPI,
     props: 'properties'
   }
@@ -8544,6 +8830,71 @@ exports.default = __OBJECT__WRAPPER__(new Method());
 
 /***/ }),
 
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/clone.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.find = find;
+exports.deepClone = deepClone;
+
+var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+function find(list, f) {
+  return list.filter(f)[0];
+}
+
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+function deepClone(obj) {
+  var cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+  // just return if obj is immutable value
+  if ((0, _type.type)(obj) !== 'Object' && (0, _type.type)(obj) !== 'Array') {
+    return obj;
+  }
+
+  // if obj is hit, it is in circular structure
+  var hit = find(cache, function (c) {
+    return c.original === obj;
+  });
+  if (hit) {
+    return hit.copy;
+  }
+
+  var copy = Array.isArray(obj) ? [] : {};
+  // put the copy into cache at first
+  // because we want to refer it in recursive deepClone
+  cache.push({
+    original: obj,
+    copy: copy
+  });
+
+  Object.keys(obj).forEach(function (key) {
+    copy[key] = deepClone(obj[key], cache);
+  });
+
+  return copy;
+}
+
+/***/ }),
+
 /***/ "./node_modules/chameleon-runtime/src/platform/common/util/config.js":
 /***/ (function(module, exports) {
 
@@ -8704,7 +9055,7 @@ function getPath(pathStr, key, type) {
     return pathStr + '[' + key + ']';
   }
 
-  return isNum(key) ? pathStr + '[' + key + ']' : pathStr ? pathStr + '.' + key : key;
+  return pathStr ? pathStr + '.' + key : key;
 }
 
 function isNaN(value) {
@@ -8733,15 +9084,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LIFECYCLE = {
   web: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate'],
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'activated', 'deactivated', 'errorCaptured', 'serverPrefetch', 'beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate'],
+    usedHooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed'],
     hooksMap: {
-      'viewappear': 'beforeRouteEnter',
-      'viewdisappear': 'beforeRouteLeave'
+      // 'onShow': 'beforeRouteEnter',
+      // 'onHide': 'beforeRouteLeave'
     },
-    polyHooks: ['beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate']
+    polyHooks: ['activated', 'deactivated', 'errorCaptured', 'serverPrefetch', 'beforeRouteEnter', 'beforeRouteLeave', 'beforeRouteUpdate']
   },
   weex: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'viewappear', 'viewdisappear']
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed'],
+    usedHooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeDestroy', 'destroyed'],
+    hooksMap: {},
+    polyHooks: ['viewappear', 'viewdisappear']
   },
   wx: {
     app: {
@@ -8763,13 +9118,14 @@ var LIFECYCLE = {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
         'beforeMount': 'onLoad',
-        'mounted': 'onShow',
+        'mounted': 'onReady',
         'beforeDestroy': 'onUnload',
-        'destroyed': 'onUnload'
-
+        'destroyed': 'onUnload',
+        'onShow': 'onShow',
+        'onHide': 'onHide'
       },
-      usedHooks: ['onLoad', 'onShow', 'onUnload'],
-      polyHooks: ['onReady', 'onHide', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap']
+      usedHooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      polyHooks: ['onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap']
     },
     component: {
       hooks: ['created', 'attached', 'ready', 'detached', 'moved'],
@@ -8805,13 +9161,14 @@ var LIFECYCLE = {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
         'beforeMount': 'onLoad',
-        'mounted': 'onShow',
+        'mounted': 'onReady',
         'beforeDestroy': 'onUnload',
-        'destroyed': 'onUnload'
-
+        'destroyed': 'onUnload',
+        'onShow': 'onShow',
+        'onHide': 'onHide'
       },
-      usedHooks: ['onLoad', 'onShow', 'onUnload'],
-      polyHooks: ['onReady', 'onHide', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onTitleClick', 'onPageScroll', 'onTabItemTap', 'onOptionMenuClick', 'onPopMenuClick', 'onPullIntercept']
+      usedHooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      polyHooks: ['onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onTitleClick', 'onPageScroll', 'onTabItemTap', 'onOptionMenuClick', 'onPopMenuClick', 'onPullIntercept']
     },
     component: {
       hooks: ['didMount', 'didUnmount'],
@@ -8847,13 +9204,14 @@ var LIFECYCLE = {
         'beforeCreate': 'onLoad',
         'created': 'onLoad',
         'beforeMount': 'onLoad',
-        'mounted': 'onShow',
+        'mounted': 'onReady',
         'beforeDestroy': 'onUnload',
-        'destroyed': 'onUnload'
-
+        'destroyed': 'onUnload',
+        'onShow': 'onShow',
+        'onHide': 'onHide'
       },
-      usedHooks: ['onLoad', 'onShow', 'onUnload'],
-      polyHooks: ['onReady', 'onHide', 'onForceReLaunch', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onTabItemTap']
+      usedHooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      polyHooks: ['onForceReLaunch', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onTabItemTap']
     },
     component: {
       hooks: ['created', 'attached', 'ready', 'detached'],
@@ -8869,12 +9227,145 @@ var LIFECYCLE = {
       polyHooks: []
     }
   },
+  qq: {
+    app: {
+      hooks: ['onLaunch', 'onShow', 'onHide', 'onError', 'onPageNotFound'],
+      hooksMap: {
+        'beforeCreate': 'onLaunch',
+        'created': 'onLaunch',
+        'beforeMount': 'onLaunch',
+        'mounted': 'onShow',
+        'beforeDestroy': 'onHide',
+        'destroyed': 'onHide'
+      },
+      usedHooks: ['onLaunch', 'onShow', 'onHide'],
+      polyHooks: ['onError', 'onPageNotFound']
+    },
+    page: {
+      hooks: ['onLoad', 'onShow', 'onReady', 'onHide', 'onUnload', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap'],
+      hooksMap: {
+        'beforeCreate': 'onLoad',
+        'created': 'onLoad',
+        'beforeMount': 'onLoad',
+        'mounted': 'onReady',
+        'beforeDestroy': 'onUnload',
+        'destroyed': 'onUnload',
+        'onShow': 'onShow',
+        'onHide': 'onHide'
+      },
+      usedHooks: ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload'],
+      polyHooks: ['onPullDownRefresh', 'onReachBottom', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap']
+    },
+    component: {
+      hooks: ['created', 'attached', 'ready', 'detached', 'moved'],
+      hooksMap: {
+        'beforeCreate': 'created',
+        'created': 'attached',
+        'beforeMount': 'attached',
+        'mounted': 'ready',
+        'beforeDestroy': 'detached',
+        'destroyed': 'detached'
+      },
+      usedHooks: ['created', 'attached', 'ready', 'detached'],
+      polyHooks: ['moved']
+    }
+  },
   cml: {
-    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'viewappear', 'viewdisappear']
+    hooks: ['beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'beforeDestroy', 'destroyed', 'onShow', 'onHide']
   }
 };
 
 exports.default = new _config2.default(LIFECYCLE);
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-runtime/src/platform/common/util/options.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mergeOptions = mergeOptions;
+
+var _util = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/util.js");
+
+var _lifecycle = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/lifecycle.js");
+
+var _lifecycle2 = _interopRequireDefault(_lifecycle);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Option overwriting strategies are functions that handle
+ * how to merge a parent option value and a child option
+ * value into the final value.
+ */
+var strats = {};
+
+/**
+ * Hooks are merged as arrays.
+ */
+function mergeHook(parentVal, childVal) {
+  var res = childVal ? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal;
+  return res ? dedupeHooks(res) : res;
+}
+
+function dedupeHooks(hooks) {
+  var res = [];
+  for (var i = 0; i < hooks.length; i++) {
+    if (res.indexOf(hooks[i]) === -1) {
+      res.push(hooks[i]);
+    }
+  }
+  return res;
+}
+
+_lifecycle2.default.get('cml.hooks').forEach(function (hook) {
+  strats[hook] = mergeHook;
+});
+
+/**
+ * Default strategy.
+ */
+var defaultStrat = function defaultStrat(parentVal, childVal) {
+  return childVal === undefined ? parentVal : childVal;
+};
+
+/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ */
+function mergeOptions(parent, child, vm) {
+
+  if (typeof child === 'function') {
+    child = child.options;
+  }
+
+  if (child.extends) {
+    parent = mergeOptions(parent, child.extends, vm);
+  }
+  if (child.mixins) {
+    for (var i = 0, l = child.mixins.length; i < l; i++) {
+      parent = mergeOptions(parent, child.mixins[i], vm);
+    }
+  }
+
+  var options = {};
+  var key = void 0;
+  for (key in parent) {
+    mergeField(key);
+  }
+  for (key in child) {
+    if (!(0, _util.hasOwn)(parent, key)) {
+      mergeField(key);
+    }
+  }
+  function mergeField(key) {
+    var strat = strats[key] || defaultStrat;
+    options[key] = strat(parent[key], child[key], vm, key);
+  }
+  return options;
+}
 
 /***/ }),
 
@@ -9063,7 +9554,7 @@ function pxTransform(s) {
 /***/ (function(module, exports, __webpack_require__) {
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -9076,80 +9567,83 @@ var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/c
 
 var _style = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/style.js");
 
-function toJS(source, detectCycles, __alreadySeen) {
-    var needPxTransfer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+function toJS(source) {
+  var detectCycles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    if (detectCycles === void 0) {
-        detectCycles = true;
-    }
-    if (__alreadySeen === void 0) {
-        __alreadySeen = [];
-    }
-    // optimization: using ES6 map would be more efficient!
-    // optimization: lift this function outside toJS, this makes recursion expensive
-    function cache(value) {
-        if (detectCycles) __alreadySeen.push([source, value]);
-        return value;
-    }
+  var __alreadySeen = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-    if (detectCycles && __alreadySeen === null) __alreadySeen = [];
-    if (detectCycles && source !== null && (typeof source === 'undefined' ? 'undefined' : _typeof(source)) === "object") {
-        for (var i = 0, l = __alreadySeen.length; i < l; i++) {
-            if (__alreadySeen[i][0] === source) return __alreadySeen[i][1];
-        }
-    }
+  var needPxTransfer = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-    if ((0, _mobx.isObservable)(source)) {
-        if ((0, _mobx.isObservableArray)(source)) {
-            var res = cache([]);
-            var toAdd = source.map(function (value) {
-                return toJS(value, detectCycles, __alreadySeen);
-            });
-            res.length = toAdd.length;
-            for (var i = 0, l = toAdd.length; i < l; i++) {
-                res[i] = toAdd[i];
-            }return res;
-        }
-        if ((0, _mobx.isObservableObject)(source)) {
-            var res = cache({});
-            for (var key in source) {
-                res[key] = toJS(source[key], detectCycles, __alreadySeen);
-            }return res;
-        }
-        if ((0, _mobx.isObservableMap)(source)) {
-            var res_1 = cache({});
-            source.forEach(function (value, key) {
-                return res_1[key] = toJS(value, detectCycles, __alreadySeen);
-            });
-            return res_1;
-        }
-        if ((0, _mobx.isBoxedObservable)(source)) return toJS(source.get(), detectCycles, __alreadySeen);
+  function cache(value) {
+    if (detectCycles) {
+      __alreadySeen.push([source, value]);
+    }
+    return value;
+  }
+
+  if (detectCycles && __alreadySeen === null) {
+    __alreadySeen = [];
+  }
+
+  if (detectCycles && source !== null && (typeof source === 'undefined' ? 'undefined' : _typeof(source)) === "object") {
+    for (var _i = 0, _l = __alreadySeen.length; _i < _l; _i++) {
+      if (__alreadySeen[_i][0] === source) {
+        return __alreadySeen[_i][1];
+      }
+    }
+  }
+
+  if ((0, _mobx.isObservable)(source)) {
+    if ((0, _mobx.isObservableArray)(source)) {
+      var res = cache([]);
+      var toAdd = source.map(function (value) {
+        return toJS(value, detectCycles, __alreadySeen);
+      });
+      res.length = toAdd.length;
+      for (var i = 0, l = toAdd.length; i < l; i++) {
+        res[i] = toAdd[i];
+      }return res;
+    }
+    if ((0, _mobx.isObservableObject)(source)) {
+      var res = cache({});
+      for (var key in source) {
+        res[key] = toJS(source[key], detectCycles, __alreadySeen);
+      }return res;
+    }
+    if ((0, _mobx.isObservableMap)(source)) {
+      var res_1 = cache({});
+      source.forEach(function (value, key) {
+        return res_1[key] = toJS(value, detectCycles, __alreadySeen);
+      });
+      return res_1;
+    }
+    if ((0, _mobx.isBoxedObservable)(source)) return toJS(source.get(), detectCycles, __alreadySeen);
+  } else {
+    if ((0, _type.type)(source) === 'Array') {
+      var _res = cache([]);
+      var _toAdd = source.map(function (value) {
+        return toJS(value, detectCycles, __alreadySeen);
+      });
+
+      _res.length = _toAdd.length;
+      for (var _i2 = 0, _l2 = _toAdd.length; _i2 < _l2; _i2++) {
+        _res[_i2] = _toAdd[_i2];
+      }
+
+      return _res;
+    } else if ((0, _type.type)(source) === 'Object') {
+      var _res2 = cache({});
+      for (var _key in source) {
+        _res2[_key] = toJS(source[_key], detectCycles, __alreadySeen);
+      }
+      return _res2;
+    } else if ((0, _type.type)(source) === 'String') {
+      // cpx to rpx
+      return needPxTransfer ? (0, _style.pxTransform)(source) : source;
     } else {
-        if ((0, _type.type)(source) === 'Array') {
-            var _res = cache([]);
-            var _toAdd = source.map(function (value) {
-                return toJS(value, detectCycles, __alreadySeen);
-            });
-
-            _res.length = _toAdd.length;
-            for (var _i = 0, _l = _toAdd.length; _i < _l; _i++) {
-                _res[_i] = _toAdd[_i];
-            }
-
-            return _res;
-        } else if ((0, _type.type)(source) === 'Object') {
-            var _res2 = cache({});
-            for (var _key in source) {
-                _res2[_key] = toJS(source[_key], detectCycles, __alreadySeen);
-            }
-            return _res2;
-        } else if ((0, _type.type)(source) === 'String') {
-            // cpx to rpx
-            return needPxTransfer ? (0, _style.pxTransform)(source) : source;
-        } else {
-            return source;
-        }
+      return source;
     }
+  }
 }
 
 /***/ }),
@@ -9166,6 +9660,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.type = type;
 exports.isObject = isObject;
 exports.isPlainObject = isPlainObject;
+exports.isDef = isDef;
+exports.isPromise = isPromise;
 
 var toString = Object.prototype.toString;
 
@@ -9190,6 +9686,14 @@ function isPlainObject(obj) {
   return type(obj) === 'Object';
 }
 
+function isDef(v) {
+  return v !== undefined && v !== null;
+}
+
+function isPromise(v) {
+  return isDef(v) && typeof v.then === 'function' && typeof v.catch === 'function';
+}
+
 /***/ }),
 
 /***/ "./node_modules/chameleon-runtime/src/platform/common/util/util.js":
@@ -9201,8 +9705,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
+exports.hasOwn = hasOwn;
+exports.noop = noop;
 exports.propToFn = propToFn;
 exports.transferLifecycle = transferLifecycle;
 exports.rename = rename;
@@ -9211,6 +9715,7 @@ exports.merge = merge;
 exports.extend = extend;
 exports.extendWithIgnore = extendWithIgnore;
 exports.isExistAttr = isExistAttr;
+exports.parsePath = parsePath;
 exports.getByPath = getByPath;
 exports.enumerable = enumerable;
 exports.proxy = proxy;
@@ -9220,30 +9725,36 @@ exports.flatten = flatten;
 
 var _type = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/type.js");
 
+var _clone = __webpack_require__("./node_modules/chameleon-runtime/src/platform/common/util/clone.js");
+
+/**
+ * Check whether an object has the property.
+ */
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwn(obj, key) {
+  return hasOwnProperty.call(obj, key);
+}
+
+function noop() {}
+
 // transfer 对象的`${name}`属性值 to function
 function propToFn(obj, name) {
   if (obj && (0, _type.isObject)(obj[name])) {
     var _temp = obj[name];
 
-    if ((0, _type.isPlainObject)(_temp)) {
-      obj[name] = function () {
-        return _extends({}, _temp);
-      };
-    } else {
-      obj[name] = function () {
-        return _temp;
-      };
-    }
+    obj[name] = function () {
+      return (0, _clone.deepClone)(_temp);
+    };
   }
 }
 
 /**
  * 生命周期映射
- * @param  {Object} VMObj vm对象
+ * @param  {Object} options options
  * @param  {Object} hooksMap 映射表
  * @return {Object}     修改后值
  */
-function transferLifecycle(VMObj, hooksMap) {
+function transferLifecycle(options, hooksMap) {
   if (!hooksMap) {
     return;
   }
@@ -9256,27 +9767,26 @@ function transferLifecycle(VMObj, hooksMap) {
     _hooksTemp.push(uniKey);
     _mapTemp[uniKey] = hooksMap[key];
 
-    if (VMObj.hasOwnProperty(key)) {
-      VMObj[uniKey] = VMObj[key];
-      delete VMObj[key];
+    if (hasOwn(options, key)) {
+      options[uniKey] = options[key];
+      delete options[key];
     }
   });
 
   _hooksTemp.forEach(function (uniKey) {
     var mapKey = _mapTemp[uniKey];
-    var hook = VMObj[uniKey];
+    var hook = options[uniKey];
+    !Array.isArray(hook) && (hook = [hook]);
 
-    if (VMObj.hasOwnProperty(uniKey) && mapKey && hook) {
-      if (VMObj.hasOwnProperty(mapKey)) {
-        if ((0, _type.type)(VMObj[mapKey]) !== 'Array') {
-          VMObj[mapKey] = [VMObj[mapKey], hook];
-        } else {
-          VMObj[mapKey].push(hook);
-        }
+    if (hasOwn(options, uniKey) && mapKey && hook) {
+      if (hasOwn(options, mapKey)) {
+        !Array.isArray(options[mapKey]) && (options[mapKey] = [options[mapKey]]);
+
+        options[mapKey] = options[mapKey].concat(hook);
       } else {
-        VMObj[mapKey] = [hook];
+        options[mapKey] = hook;
       }
-      delete VMObj[uniKey];
+      delete options[uniKey];
     }
   });
 }
@@ -9393,9 +9903,15 @@ function isExistAttr(obj, attr) {
   }
 }
 
-function getByPath(data, pathStr, notExistOutput) {
-  if (!pathStr) return data;
-  var path = pathStr.split('.');
+function parsePath(path) {
+  return function (obj) {
+    return getByPath(obj, path);
+  };
+}
+
+function getByPath(data, path, notExistOutput) {
+  if (!path) return data;
+  var segments = path.split('.');
   var notExist = false;
   var value = data;
   var _iteratorNormalCompletion2 = true;
@@ -9403,7 +9919,7 @@ function getByPath(data, pathStr, notExistOutput) {
   var _iteratorError2 = undefined;
 
   try {
-    for (var _iterator2 = path[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+    for (var _iterator2 = segments[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
       var key = _step2.value;
 
       if (isExistAttr(value, key)) {
@@ -10378,6 +10894,191 @@ function proxy(target, source, keys, mapKeys, readonly) {
     Object.defineProperty(target, mapKeys ? mapKeys[index] : key, descriptor);
   });
   return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-ui-builtin/assets/js/utils/utils.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _index = __webpack_require__("./node_modules/chameleon-api/src/interfaces/cpx2px/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+exports.str2obj = str2obj;
+exports.pxTransform = pxTransform;
+exports.cmlStyleTransfer = cmlStyleTransfer;
+exports.getValBetweenMaxAndMin = getValBetweenMaxAndMin;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function str2obj(str) {
+    var styleAry = str.split(';');
+    var obj = {};
+    styleAry.forEach(function (element) {
+        var classObj = element.split(':');
+        var className = String(classObj[0]).replace(/(^\s*)|(\s*)$/g, "");
+        var classValue = String(classObj[1]).replace(/(^\s*)|(\s*)$/g, "");
+        obj[className] = classValue;
+    });
+    return obj;
+}
+
+function pxTransform(s) {
+    if (!s) return '';
+    if (!!~s.indexOf('cpx')) {
+        return s.replace(/(-?\d*\.?\d*)cpx/ig, function (matchs, $1) {
+            return (0, _index2.default)(Number($1)) + 'px';
+        });
+    }
+    return s;
+}
+
+function cmlStyleTransfer(str) {
+    if (!str) return {};
+    var styleAry = str.split(';');
+    var obj = {};
+    styleAry.forEach(function (element) {
+        var classObj = element.split(':');
+        var className = String(classObj[0]).replace(/(^\s*)|(\s*)$/g, "");
+        if (className) {
+            var classValue = pxTransform(String(classObj[1]).replace(/(^\s*)|(\s*)$/g, ""));
+            obj[className] = classValue;
+        }
+    });
+    return obj;
+}
+
+function getValBetweenMaxAndMin(value, maxValue, minValue) {
+    if (isNaN(Number(value))) {
+        return '';
+    }
+    if (isNaN(maxValue) || isNaN(minValue)) {
+        return value;
+    }
+    if (maxValue != Infinity && maxValue <= Number(value)) {
+        value = String(maxValue);
+    }
+    if (minValue != -Infinity && minValue >= Number(value)) {
+        value = String(minValue);
+    }
+    return value;
+}
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-ui-builtin/components/button/util.js":
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.transCls = transCls;
+function transCls(base, ctx) {
+  var type = ctx.type,
+      disabled = ctx.disabled,
+      size = ctx.size,
+      hover = ctx.hover,
+      hasWidth = ctx.hasWidth;
+
+
+  var classList = [base];
+
+  if (hover) {
+    classList.push(base + '-active');
+  }
+
+  if (!!~'red|orange|white|green'.indexOf(type)) {
+    classList.push(base + '-' + type);
+
+    if (hover) {
+      classList.push(base + '-' + type + '-active');
+    }
+
+    if (disabled) {
+      classList.push(base + '-' + type + '-disable');
+    }
+  }
+
+  if (!!~'full|big|medium|small|stretch|auto'.indexOf(size) && !hasWidth) {
+    classList.push(base + '-' + size);
+  }
+
+  if (disabled) {
+    classList.push(base + '-disable');
+  }
+
+  return classList.join(' ');
+}
+
+/***/ }),
+
+/***/ "./node_modules/chameleon-ui-builtin/components/richtext/richHandle.js":
+/***/ (function(module, exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = richHandle;
+function richHandle(richData) {
+  var richConf = richData.rich_message,
+      richTexts = richData.message.split('');
+  //切割文本
+  richTexts = richTexts.map(function (item) {
+    return {
+      text: item,
+      index: -1
+    };
+  });
+  // 过滤错误配置
+  richConf = richConf.filter(function (item) {
+    var start = item.start,
+        end = item.end;
+
+    start = parseInt(start, 10);
+    end = parseInt(end, 10);
+    return !isNaN(start) && !isNaN(end) && start <= end;
+  });
+  // 遍历获取文本对应样式index
+  richConf.forEach(function (item, index) {
+    var start = item.start,
+        end = item.end;
+
+    start = parseInt(start, 10);
+    end = parseInt(end, 10);
+    start = start < 0 ? 0 : start;
+    end = end > richTexts.length - 1 ? richTexts.length - 1 : end;
+    for (var i = start; i <= end; i++) {
+      richTexts[i].index = index;
+    }
+  });
+  var start = 0,
+      end = richTexts.length;
+  var richList = [];
+  while (start < end) {
+    var i = start;
+    var rIndex = richTexts[i].index;
+    var conf = rIndex === -1 ? null : richConf[rIndex];
+    var ri = {
+      font_size: conf && conf.font_size,
+      color: conf && conf.color,
+      text: ''
+    };
+    for (; i < end; i++) {
+      if (richTexts[i].index !== rIndex) {
+        break;
+      }
+      ri.text += richTexts[i].text;
+    }
+    richList.push(ri);
+    start = i;
+  }
+
+  return richList;
 }
 
 /***/ }),

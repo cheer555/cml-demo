@@ -64,6 +64,10 @@ var CDialog = function CDialog() {
       type: String,
       default: "确定"
     },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
     iconType: {
       type: String,
       default: "warn" //warn  success
@@ -73,13 +77,16 @@ var CDialog = function CDialog() {
       default: "" //warn  success
     },
     iconStyle: {
-      type: Object
+      type: Object,
+      default: {}
     },
     confirmStyle: {
-      type: Object
+      type: Object,
+      default: {}
     },
     cancelStyle: {
-      type: Object
+      type: Object,
+      default: {}
     }
   };
   this.data = {

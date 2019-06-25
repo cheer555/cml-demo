@@ -1,6 +1,6 @@
 <view class=" cml-base cml-view cml-2c8dca50"><c-popup show="{{show}}" onClose="_cmlEventProxy" data-eventclose="cancelclick" position="bottom" class=" cml-base cml-c-popup cml-2c8dca50">
   <view class="action-wrap  cml-base cml-view cml-2c8dca50">
-    <view class="action-header  cml-base cml-view cml-2c8dca50">
+    <view class="action-header  cml-base cml-view cml-2c8dca50" a:if="{{title || pickerStyle}}">
       <text class="action-header-text  cml-base cml-text cml-2c8dca50" style="{{actionHeaderStyle}}">{{title}}</text>
       <view class="cancel-wrap  cml-base cml-view cml-2c8dca50" a:if="{{pickerStyle}}" onTap="_cmlEventProxy" data-eventtap="cancelclick">
         <text class="cancel-text  cml-base cml-text cml-2c8dca50" style="{{actionCancelStyle}}">{{cancelTxt}}</text>

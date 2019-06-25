@@ -1,6 +1,6 @@
 <c-popup show="{{show}}" bindclose="_cmlEventProxy" data-eventclose="cancelclick" position="bottom" class=" cml-view cml-c-popup">
   <view class="action-wrap  cml-base cml-view">
-    <view class="action-header  cml-base cml-view">
+    <view class="action-header  cml-base cml-view" wx:if="{{title || pickerStyle}}">
       <text class="action-header-text  cml-base cml-text" style="{{actionHeaderStyle}}">{{title}}</text>
       <view class="cancel-wrap  cml-base cml-view" wx:if="{{pickerStyle}}" bindtap="_cmlEventProxy" data-eventtap="cancelclick">
         <text class="cancel-text  cml-base cml-text" style="{{actionCancelStyle}}">{{cancelTxt}}</text>
